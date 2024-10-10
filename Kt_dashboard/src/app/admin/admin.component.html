@@ -1,0 +1,55 @@
+
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed">
+    <!-- Sidebar Start -->
+  <app-menu-gauche></app-menu-gauche>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper ">
+      <!--  Header Start -->
+      <header class="app-header mb-2">
+        <nav class="navbar navbar-expand-lg navbar-light">
+
+       <div class="title">
+        <label class="text-capitalize">super admin dashboard</label>
+       </div>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+              <li class="nav-item dropdown">
+                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                  <p class="username-label ">{{ userInfo.u_username }}</p>
+                  <i class="fa-regular fa-circle-user icon "></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <!-- Afficher le nom d'utilisateur à la place de l'image -->
+                   
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-user fs-6"></i>
+                      <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-mail fs-6"></i>
+                      <p class="mb-0 fs-3">My Account</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-list-check fs-6"></i>
+                      <p class="mb-0 fs-3">My Task</p>
+                    </a>
+                    <a href="javascript:;" (click)="logout()" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+        </nav>
+      </header>
+      <!--  Header End -->
+     
+     <router-outlet></router-outlet>
+    </div>
+  </div>
+
+

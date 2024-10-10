@@ -1,0 +1,275 @@
+
+/* Global Styles */
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.header-section{
+  border: 1px solid #002556;
+  border-radius: 15px;
+  width: 100%;
+  margin: auto;
+}
+/* Header Styles */
+.header {
+  text-align: center;
+ 
+}
+
+.logo {
+  width: 80px; /* Diminuer la taille du logo */
+}
+
+.logo-text {
+  font-size: 24px;
+  color: #002556;
+  margin-top: 10px;
+  font-weight: bold; /* Rendre le texte en gras */
+}
+
+.wrapper {
+  background-color: #cccccc91;
+  border-radius: 15px;
+}
+
+/* Title Styles */
+.title {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  top: 40px;
+}
+
+.title h3 {
+  font-weight: bold; /* Rendre le texte en gras */
+  font-size: 30px;
+  color: #002556;
+}
+
+/* Progress Container Styles */
+.progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  position: relative;
+  top: 50px;
+}
+
+.progress-step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #002556;
+  margin: 0 10px;
+}
+
+.progress-step-active {
+  background-color: #002556;
+  color: #ffffff;
+}
+
+/* Card Styles */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #ffffff;
+  position: relative;
+  top: 30px;
+}
+
+.body-card-title {
+  font-size: 20px;
+  color: #002556;
+  margin-bottom: 20px;
+  font-weight: bold; /* Rendre le texte en gras */
+}
+
+/* Form Styles */
+.form-label {
+  color: #002556;
+  font-weight: bold; /* Rendre le texte en gras */
+}
+
+.form-control {
+
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.form-control:focus {
+  border-color: #002556;
+  box-shadow: 0 0 0 0.2rem rgba(0, 37, 86, 0.25);
+}
+
+.btn-next {
+  background-color: #002556;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-next:hover {
+  background-color: #cccccc91;
+  color: #002556;
+}
+
+.btn-prev {
+  background-color: #cccccc91;
+  color: #002556;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-prev:hover {
+  background-color: #002556;
+  color: #ffffff;
+}
+
+/* Picture Styles */
+.picture-input {
+  display: none;
+}
+
+.picture {
+  display: inline-block;
+  height: 150px;
+  width: 150px;
+  border-radius: 6px;
+  border: 2px dashed #002556;
+  text-align: center;
+  line-height: 150px;
+  cursor: pointer;
+  color: #002556;
+}
+
+.picture:hover {
+  color: #003c8f;
+  border: 2px dashed #003c8f;
+}
+
+#preview {
+  display: inline-block;
+  height: 150px;
+  width: 150px;
+  border-radius: 6px;
+  border: 2px dashed #002556;
+  text-align: center;
+  line-height: 150px;
+  cursor: pointer;
+}
+
+#preview:hover {
+  border: 2px dashed #003c8f;
+}
+
+
+.parent-type {
+  background-color: #ccc;
+  border-radius: 15px;
+  padding: 12px;
+  color: #000;
+  font-weight: bold;
+  margin: 10px;
+  width: 95%;
+  font-size: 18px;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .logo {
+      width: 50px; /* Réduit la taille du logo pour les écrans plus petits */
+  }
+
+  .logo-text {
+      font-size: 18px; /* Réduit la taille du texte pour les écrans plus petits */
+  }
+
+  .title h3 {
+      font-size: 20px; /* Réduit la taille du titre pour les écrans plus petits */
+  }
+
+  .progress-step {
+      width: 40px; 
+      height: 40px;
+      font-size: 18px; 
+      position: relative;
+      top: 22px;
+  }
+
+  .body-card-title {
+      font-size: 25px; /* Réduit la taille du titre pour les écrans plus petits */
+  }
+
+
+}
+
+@media (max-width: 576px) {
+  .container {
+      padding: 10px; /* Réduit le padding pour les petits écrans */
+  }
+
+  .logo-text {
+      font-size: 18px; /* Réduit la taille du texte pour les très petits écrans */
+  }
+
+  .title h3 {
+      font-size: 18px; /* Réduit la taille du titre pour les très petits écrans */
+  }
+
+  .progress-step {
+      width: 40px; /* Réduit la taille des étapes pour les très petits écrans */
+      height: 40px;
+      font-size: 18px; /* Réduit la taille du texte à l'intérieur des étapes */
+  }
+
+  .body-card-title {
+      font-size: 25px; /* Réduit la taille du titre pour les très petits écrans */
+  }
+
+}
+
+@media (max-width: 375px) {
+  .container {
+      padding: 10px; /* Réduit le padding pour les petits écrans */
+  }
+
+  .logo-text {
+      font-size: 16px; /* Réduit la taille du texte pour les très petits écrans */
+  }
+
+  .title h3 {
+      font-size: 18px; /* Réduit la taille du titre pour les très petits écrans */
+  }
+
+  .progress-step {
+      width: 40px; /* Réduit la taille des étapes pour les très petits écrans */
+      height: 40px;
+      font-size: 18px; /* Réduit la taille du texte à l'intérieur des étapes */
+  }
+
+  .body-card-title {
+      font-size: 25px; /* Réduit la taille du titre pour les très petits écrans */
+  }
+
+
+}

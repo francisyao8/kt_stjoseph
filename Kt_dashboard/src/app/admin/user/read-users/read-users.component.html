@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row mt-">
+    <div class="title">
+      <h2>Admins</h2>
+    </div>
+  </div>
+  <hr>
+  <div class="table mt-4">
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [routerLink]="['/admin','user','view-users', user.u_uid]" style="cursor: pointer;"
+          *ngFor="let user of users_list">
+          <td>
+            <div class="d-flex align-items-center">
+              <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px"
+                class="rounded-circle" />
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{user?.u_firstname}} {{user?.u_lastname}}</p>
+                <p class="text-muted mb-0">{{user?.u_email}}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{user?.u_mobile}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1 text-center rounded-pill" [ngClass]="{
+        'text-bg-info': user?.u_role === 'super admin',
+        'text-bg-danger': user?.u_role === 'coordinateur' || user?.u_role === 'secrataire',
+        'text-bg-warning': user?.u_role.startsWith('responsable')
+    }">
+              {{ user?.u_role }}
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              <button class="btn" type="btn-link" style="color: #048004;"
+                [routerLink]="['/admin','user','view-users', user?.u_uid]" title="View">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="btn" type="btn-link" style="color: #046380;" title="Update"
+                [routerLink]="['/admin','user', 'edit-users', user?.u_uid]">
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+              <button class="btn" type="btn-link" style="color: #be0a0a;" title="Delete"
+                (click)="delAdmin(user?.u_uid, user?.u_matricule)">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

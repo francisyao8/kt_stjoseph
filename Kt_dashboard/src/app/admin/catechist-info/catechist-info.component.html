@@ -1,0 +1,79 @@
+<div class="container print-page">
+    <!-- En-tête avec le logo et la photo -->
+    <section class="header-section">
+        <div class="header">
+            <div class="body-header">
+                <img src="./assets/images/logos/stj.png" alt="Logo" class="logo">
+                <h2 class="logo-text">PAROISSE ST JOSEPH ARTISAN RIVIERA BONOUMIN</h2>
+                <img src="{{ catechiste_info?.c_picture }}" alt="Photo du catéchiste" class="profile-image-header">
+            </div>
+        </div>
+    </section>
+    <hr>
+
+    <div class="title">
+        <h3>FICHE DU CATECHISTE</h3>
+    </div>
+
+    <section class="body-section">
+        <div class="card">
+            <div class="body-card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Informations du catéchiste -->
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Matricule:</div>
+                            <div class="info-value">{{ catechiste_info?.c_matricule }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Nom:</div>
+                            <div class="info-value">{{ catechiste_info?.c_lastname }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Prénom:</div>
+                            <div class="info-value">{{ catechiste_info?.c_firstname }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Ancienneté:</div>
+                            <div class="info-value">{{ catechiste_info?.c_seniority }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Section:</div>
+                            <div class="info-value">{{ catechiste_info?.c_section }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Mobile:</div>
+                            <div class="info-value">{{ catechiste_info?.c_mobile }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Email:</div>
+                            <div class="info-value">{{ catechiste_info?.c_email }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Adresse:</div>
+                            <div class="info-value">{{ catechiste_info?.c_address }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Date de naissance:</div>
+                            <div class="info-value">{{ catechiste_info?.c_birth_date | date: 'dd/MM/yyyy' }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Date d'inscription:</div>
+                            <div class="info-value">{{ catechiste_info?.c_creation_date | date: 'dd/MM/yyyy' }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="photo-location">
+                            <img src="./assets/images/logos/stjoseph_img2.png" alt="Photo de l'eglise" class="stj-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </section>
+
+    <div class="download-button-container">
+        <button (click)="downloadPage()" class="download-button">Télécharger la fiche</button>
+    </div>
+</div>

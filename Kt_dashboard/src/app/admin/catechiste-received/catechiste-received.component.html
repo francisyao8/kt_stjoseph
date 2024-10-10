@@ -1,0 +1,78 @@
+<div class="container">
+  <section class="header-section">
+      <div class="header">
+          <div class="body-header">
+              <a routerLink="/kt-st-joseph/home">
+                  <img src="./assets/images/logos/stj.png" alt="Logo" class="logo">
+                  <h2 class="logo-text">PAROISSE ST JOSEPH ARTISAN RIVIERA BONOUMIN</h2>
+              </a>
+          </div>
+      </div>
+  </section>
+  <hr>
+
+  <div class="title">
+      <h3>Reçu</h3>
+  </div>
+
+  <section class="body-section">
+      <div class="card">
+          <div class="body-card">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="ref-info mt-2">
+                          <div class="info-label">Matricule:</div>
+                          <div class="info-value">{{ catechiste_info?.c_matricule }}</div>
+                      </div>
+                      <div class="ref-info mt-2">
+                          <div class="info-label">Lastname:</div>
+                          <div class="info-value">{{ catechiste_info?.c_lastname }}</div>
+                      </div>
+                      <div class="ref-info mt-2">
+                          <div class="info-label">Firstname:</div>
+                          <div class="info-value">{{ catechiste_info?.c_firstname }}</div>
+                      </div>
+                      <div class="ref-info mt-2">
+                          <div class="info-label">Seniority:</div>
+                          <div class="info-value">{{ catechiste_info?.c_seniority }}</div>
+                      </div>
+                      <div class="ref-info mt-2">
+                          <div class="info-label">Section:</div>
+                          <div class="info-value">{{ catechiste_info?.c_section }}</div>
+                      </div>
+                      <div class="ref-info mt-2">
+                          <div class="info-label">Mobile:</div>
+                          <div class="info-value">{{ catechiste_info?.c_mobile }}</div>
+                      </div>
+                      
+                  </div>
+                  <div class="col-md-6 ">
+                      <div class="qr-location">
+                          <img src="./assets/logo/qr-code.png" alt="Logo" class="img-fluid">
+
+                      </div>
+                  </div>
+              </div>
+              <div class="payment-info mt-2">
+                <table class="table border-top">
+                    <thead>
+                      <tr>
+                        <th scope="col">Numéro d'inscription</th>
+                        <th scope="col">Date d'inscription</th>
+                        <th scope="col">Référence de l'inscription </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>#{{ catechiste_info?.c_creation_number }}</td>
+                        <td>{{ catechiste_info?.c_creation_date | date: 'medium' }}</td>
+                        <td>{{ catechiste_info?.c_ref_creation }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+              
+          </div>
+      </div>
+  </section>
+</div>

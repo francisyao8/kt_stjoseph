@@ -1,0 +1,179 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.header-section {
+    border: 1px solid #002556;
+    border-radius: 15px;
+    width: 100%;
+    margin: auto;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+}
+
+.body-header {
+    display: flex;
+    justify-content: space-between; /* Aligne le logo, le texte et l'image aux extrémités */
+    align-items: center; /* Centre verticalement les éléments */
+    padding: 10px;
+}
+
+.logo {
+    width: 100px; /* Taille du logo */
+}
+
+.logo-text {
+    font-size: 24px;
+    color: #002556;
+    font-weight: bold;
+    margin: 0 20px; /* Marge entre le logo, le texte et l'image */
+    flex: 1; /* Permet au texte de prendre l'espace restant */
+    text-align: center;
+}
+
+.profile-image-header {
+    height: 130px;
+    width: 115px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.title {
+    text-align: center;
+    margin: 20px 0;
+    background-color: #cccccc91;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.title h3 {
+    font-weight: bold;
+    font-size: 30px;
+    color: #002556;
+}
+
+/* Card Styles */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.ref-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.info-label {
+    margin-right: 10px;
+}
+
+.info-value {
+    text-align: end;
+    font-weight: bold;
+}
+
+.stj-image{
+    height: 100%;
+    width: 190px;
+    border-radius: 8px;
+    object-fit: initial;
+    position: relative;
+    top: 80px;
+    left: 60px;
+}
+
+/* Styles existants */
+
+.download-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajoutez de l'espace au-dessus du bouton */
+  }
+  
+  .download-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #002556; /* Couleur de fond du bouton */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .download-button:hover {
+    background-color: #001a3a; /* Couleur de fond au survol */
+  }
+
+  
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .logo {
+        width: 50px;
+    }
+
+    .logo-text {
+        font-size: 18px;
+    }
+
+    .title h3 {
+        font-size: 20px;
+    }
+
+    .profile-image-header {
+        width: 100px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 10px;
+    }
+
+    .logo-text {
+        font-size: 18px;
+    }
+
+    .title h3 {
+        font-size: 18px;
+    }
+
+    .profile-image-header {
+        width: 80px;
+        height: 100px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+
+    .profile-image-header {
+        height: 120px;
+        width: 100px;
+    }
+
+    .card {
+        border: none;
+        box-shadow: none;
+    }
+}

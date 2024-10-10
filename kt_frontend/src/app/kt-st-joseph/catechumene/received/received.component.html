@@ -1,0 +1,79 @@
+<div class="container">
+    <section class="header-section">
+        <div class="header">
+            <div class="body-header">
+                <img src="./assets/logo/stj.png" alt="Logo" class="logo">
+                <h2 class="logo-text">PAROISSE ST JOSEPH ARTISAN RIVIERA BONOUMIN</h2>
+            </div>
+        </div>
+    </section>
+    <hr>
+
+    <div class="title">
+        <h3>Reçu</h3>
+    </div>
+
+    <section class="body-section">
+        <div class="card">
+            <div class="body-card">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Matricule:</div>
+                            <div class="info-value">{{ catechumene_info?.kt_matricule }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Lastname:</div>
+                            <div class="info-value">{{ catechumene_info?.kt_lastname }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Firstname:</div>
+                            <div class="info-value">{{ catechumene_info?.kt_firstname }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Level:</div>
+                            <div class="info-value">{{ catechumene_info?.kt_level }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Section:</div>
+                            <div class="info-value">{{ catechumene_info?.kt_section }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Mobile:</div>
+                            <div class="info-value">{{ catechumene_info?.kt_mobile }}</div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="qr-location">
+                            <img src="./assets/logo/qr-code.png" alt="Logo" class="img-fluid">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-info mt-2">
+                    <table class="table border-top">
+                        <thead>
+                            <tr>
+                                <th scope="col">Numéro d'inscription</th>
+                                <th scope="col">Date d'inscription</th>
+                                <th scope="col">Référence de l'inscription </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#{{ catechumene_info?.kt_creation_number }}</td>
+                                <td>{{ catechumene_info?.kt_creation_date | date: 'medium' }}</td>
+                                <td>{{ catechumene_info?.kt_ref_creation }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="back-btn text-center mt-3">
+            <button type="button" class="btn btn-prev rounded-pill me-3 mt-3" routerLink="/kt-st-joseph/home">Retour</button>
+        </div>
+    </section>
+</div>

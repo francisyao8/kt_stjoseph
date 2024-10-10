@@ -1,0 +1,124 @@
+<div class="container">
+    <section class="header-section">
+        <div class="header">
+            <div class="body-header">
+                <img src="./assets/logo/stj.png" alt="Logo" class="logo">
+                <h2 class="logo-text">PAROISSE ST JOSEPH ARTISAN RIVIERA BONOUMIN</h2>
+            </div>
+        </div>
+    </section>
+    <hr>
+
+    <div class="title">
+        <h3>Formulaire d'inscription</h3>
+    </div>
+
+    <section class="body-section">
+        <div class="card">
+            <div class="body-card">
+                <h3 class="body-card-title">Informations de base</h3>
+                <form [formGroup]="register_form" (submit)=" submitForm()">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                          <div class="dropify-location" id="picture">
+                            <input name="file" type="file" name="c_picture" formControlName="c_picture"
+                              id="c_picture" class="dropify" data-height="160" style="font-size: large !important;" />
+                          </div>
+                        </div>
+                      </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="firstname" class="form-label text-capitalize">Prénom <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="c_firstname" formControlName="c_firstname"
+                                id="firstname" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastname" class="form-label text-capitalize">Nom <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="c_lastname" formControlName="c_lastname"
+                                id="lastname" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="birth-date" class="form-label">Date de naissance <span
+                                    class="text-danger">*</span></label>
+                            <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+                                <span class="input-group-text input-group-addon bg-transparent" data-toggle>
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                </span>
+                                <input type="date" class="form-control bg-transparent" id="flatpickr-date"
+                                    placeholder="Select date" data-input name="c_birth_date"
+                                    formControlName="c_birth_date">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mobile" class="form-label">Téléphone <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" name="c_mobile" formControlName="c_mobile"
+                                id="mobile" placeholder="(000) 00-000-000">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="address" class="form-label">Adresse <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="c_address" formControlName="c_address"
+                                id="address">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="c_email" formControlName="c_email" id="email"
+                                placeholder="Ex: monnom@gmail.com">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                            <h6 class="mb-0 me-4" class="form-label">Genre <span class="text-danger">*</span>:</h6>
+                            <div class="form-check form-check-inline mb-2 ms-2">
+                                <input class="form-check-input" type="radio" formControlName="c_gender" value="female"
+                                    name="c_gender" id="femaleGender">
+                                <label class="form-check-label" for="femaleGender">Femme</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-2 me-4">
+                                <input class="form-check-input" type="radio" formControlName="c_gender" value="male"
+                                    name="c_gender" id="maleGender">
+                                <label class="form-check-label" for="maleGender">Homme</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-outline ">
+                                <label class="form-label" for="form3Example8">Ancienneté <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg mb-3 text-capitalize" name="c_seniority"
+                                    name="c_seniority" formControlName="c_seniority" aria-label="Large select example"
+                                    id="seniority">
+                                    <option *ngFor="let item of cat_seniority" [value]="item?.cat_seniority">
+                                        {{item?.cat_seniority}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="section">Section de catéchisme <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg mb-3 text-capitalize" name="c_section"
+                                name="c_section" formControlName="c_section" aria-label="Large select example"
+                                id="section">
+                                <option *ngFor="let section of cat_section" [value]="section?.cat_section">
+                                    {{section?.cat_section}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-next rounded-pill" [disabled]="!register_form.valid">
+                            <span *ngIf="!isloading">S'inscrire</span>
+                            <span *ngIf="isloading" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                            <span *ngIf="isloading" class="visually-hidden" role="status">Loading...</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

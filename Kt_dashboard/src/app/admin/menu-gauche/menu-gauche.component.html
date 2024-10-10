@@ -1,0 +1,112 @@
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+      <div class="brand-logo d-flex align-items-center justify-content-between">
+        <a href="/admin/dashboard" class="text-nowrap logo-img fa-4x">
+          <img src="../assets/images/logos/stj.png" width="120" alt="" />
+        </a>
+        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+          <i class="ti ti-x fs-8"></i>
+        </div>
+      </div>
+      <!-- Sidebar navigation-->
+      <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+        <ul id="sidebarnav">
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu fw-semibold fs-4">Home</span>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="dashboard" aria-expanded="false">
+              <span>
+                <i class="fa-solid fa-gauge-high"></i>
+              </span>
+              <span class="hide-menu fw-semibold fs-4">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu fw-semibold fs-4">sections</span>
+          </li>
+          <li class="sidebar-item ">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+              <span><i class="fa-solid fa-layer-group" style="color: white;"></i></span>
+              <span class="hide-menu fw-semibold fs-4 ms-2" style="color: white;">Sections</span>
+            </button>
+            <div class="collapse" id="account-collapse" >
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small fw-semibold fs-4">
+                <li class="hide-menu"><a routerLink="sections/child" class="link-dark rounded" style="color: white;">Child</a></li>
+                <li class="hide-menu"><a routerLink="sections/young" class="link-dark rounded" style="color: white;">Young</a></li>
+                <li class="hide-menu"><a routerLink="sections/adult" class="link-dark rounded" style="color: white;">Adult</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu fw-semibold fs-4">Catechist</span>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="animateurs" aria-expanded="false">
+              <span>
+                <i class="fa-solid fa-person-chalkboard"></i>
+              </span>
+              <span class="hide-menu fw-semibold fs-4">Catechist</span>
+            </a>
+          </li>
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu fw-semibold fs-4">Users</span>
+          </li>
+          <li class="sidebar-item" >
+            <a class="sidebar-link" routerLink="user/read-users" aria-expanded="false">
+              <span>
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <span class="hide-menu fw-semibold fs-4">Users</span>
+            </a>
+          </li>
+
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu fw-semibold fs-4">Settings</span>
+          </li>
+         <li class="sidebar-item">
+          <a class="sidebar-link" routerLink="/admin/settings/create-catechiste" aria-expanded="false">
+            <span>
+              <i class="fa-solid fa-user-plus"></i>
+            </span>
+            <span class="hide-menu fw-semibold fs-4">Add Catechiste</span>
+          </a>
+          <a class="sidebar-link" routerLink="/admin/settings/create-catechumene" aria-expanded="false">
+            <span>
+              <i class="fa-solid fa-user-plus"></i>
+            </span>
+            <span class="hide-menu fw-semibold fs-4">Add Catechumene</span>
+          </a>
+          <a class="sidebar-link" routerLink="/admin/settings/history" aria-expanded="false">
+            <span>
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </span>
+            <span class="hide-menu fw-semibold fs-4">history</span>
+          </a>
+          <a class="sidebar-link" routerLink="/admin/settings/program" aria-expanded="false">
+            <span>
+              <i class="fa-solid fa-calendar-days"></i>
+            </span>
+            <span class="hide-menu fw-semibold fs-4">Program</span>
+          </a>
+            <a class="sidebar-link" routerLink="/auth/login" aria-expanded="false">
+              <span>
+                <i class="fa-solid fa-right-from-bracket"></i>
+              </span>
+              <span class="hide-menu fw-semibold fs-4">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- End Sidebar navigation -->
+    </div>
+
+    <!-- End Sidebar scroll-->
+  </aside>

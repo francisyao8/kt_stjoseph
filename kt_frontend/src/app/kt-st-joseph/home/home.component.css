@@ -1,0 +1,13 @@
+/* Styles for small screens (phones) */
+@media (max-width: 576px) {
+    .hero .info {
+      padding: 20px; /* Ajouter un peu de marge intérieure */
+    }
+    .hero h2 {
+      font-size: 24px; /* Réduire la taille de la police */
+    }
+    .hero p {
+      font-size: 14px; /* Réduire la taille de la police */
+    }
+  }
+  

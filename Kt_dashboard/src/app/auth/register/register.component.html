@@ -1,0 +1,100 @@
+<section class="vh-100" style=" overflow-y: hidden; ">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 text-black">
+
+                <div class="px-5 ms-xl-4">
+                    <img src="../assets/images/logos/stj.png" class="img-fluid" alt=""
+                        style="max-width: 100%; height: auto;">
+                    <span class="h1 fw-bold mb-0">Paroisse Saint Joseph Artisan</span>
+                </div>
+
+                <div class="d-flex align-items-center h-custom-2 px-3 ms-xl-3 mt-3 pt-3 pt-xl-0 mt-xl-n3">
+                    <div class="card ">
+                        <div class="card-body">
+
+                            <form [formGroup]="register_form" (ngSubmit)=" newUser(); isLoading = true">
+                                <div class="col-md-12 d-flex">
+                                    <div class="form-outline mb-4 col-md-6"> 
+                                        <label class="form-label"
+                                            for="formfirstname">Firstname</label> 
+                                            <input type="text"
+                                            formControlName="u_firstname" name="u_firstname" id="formfirstname"
+                                            class="form-control form-control-lg" />
+                                         </div>
+                                    <div class="form-outline mb-4 col-md-6 ms-3"> 
+                                        <label class="form-label"
+                                            for="formlastname">Lastname</label> 
+                                            <input type="text"
+                                            formControlName="u_lastname" name="u_lastname" id="formlastname"
+                                            class="form-control form-control-lg" /> 
+                                        </div>
+                                </div>
+                                <div class="col-md-12 d-flex">
+                                    <div class="form-outline mb-4 col-md-6"> <label class="form-label"
+                                            for="formmobile">Mobile</label> <input type="tel" formControlName="u_mobile"
+                                            name="u_mobile" id="formmobile" class="form-control form-control-lg" />
+                                    </div>
+                                    <div class="form-outline mb-4 col-md-6 ms-3"> 
+                                        <label class="form-label"
+                                            for="formadress">Address</label> 
+                                            <input type="text"
+                                            formControlName="u_address" name="u_address" id="formadress"
+                                            class="form-control form-control-lg" /> 
+                                        </div>
+                                </div>
+                                <div class="col-md-12 d-flex">
+                                    <div class="form-outline mb-4 col-md-6"> 
+                                        <label class="form-label" for="formemail">
+                                            Email</label> 
+                                            <input type="email" formControlName="u_email" name="u_email"
+                                            id="formemail" class="form-control form-control-lg" /> 
+                                        </div>
+                                    <div class="form-outline mb-4 col-md-6 ms-3"> 
+                                        <label class="form-label"
+                                            for="formusername">Username</label>
+                                             <input type="text"
+                                            formControlName="u_username" name="u_username" id="formusername"
+                                            class="form-control form-control-lg" /> 
+                                        </div>
+                                </div>
+                                <div class="col-md-12 d-flex">
+                                    <div class="form-outline mb-4 col-md-6">
+                                         <label class="form-label" for="formrole">Role</label> 
+                                            <select class="form-select form-select-lg mb-3 text-capitalize" name="u_role" id="formrole" formControlName="u_role">
+                                                <option *ngFor="let item of admin_role" value={{item?.role}} >{{item?.role}}</option>
+                                              </select>
+                                         </div>
+                                    <div class="form-outline mb-4 col-md-6 ms-3"> 
+                                        <label class="form-label"
+                                            for="formpassword"> password</label> 
+                                            <input type="password"
+                                            formControlName="u_password" name="u_password" id="formpassword"
+                                            class="form-control form-control-lg" /> 
+                                        </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-lg rounded-pill w-100" type="submit"
+                                        role="button" [disabled]="!register_form.valid || isLoading" style="background-color: saddlebrown;">
+                                        <span class="text-white" *ngIf="!isLoading">Register</span>
+                                        <span *ngIf="isLoading">Loading...</span>
+                                    </button>
+                                </div>
+                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a
+                                        routerLink="/auth/login" class="fw-bold ">Login here</a> </p>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+                <img src="assets/images/logos/stjoseph_img.jpg"
+                    alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+            </div>
+        </div>
+    </div>
+</section>

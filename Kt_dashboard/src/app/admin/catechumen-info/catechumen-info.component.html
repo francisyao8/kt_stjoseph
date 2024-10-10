@@ -1,0 +1,199 @@
+<div class="container print-page">
+    <!-- En-tête avec le logo et la photo -->
+    <section class="header-section">
+        <div class="header">
+            <div class="body-header">
+                <img src="./assets/images/logos/stj.png" alt="Logo" class="logo">
+                <h2 class="logo-text">PAROISSE ST JOSEPH ARTISAN RIVIERA BONOUMIN</h2>
+                <img *ngIf="catechumene?.kt_picture" [src]="catechumene?.kt_picture" alt="Photo du catéchumène"
+                    class="profile-image-header">
+            </div>
+        </div>
+    </section>
+    <hr>
+
+    <div class="title">
+        <h3>FICHE DU CATECHUMENE</h3>
+    </div>
+
+    <section class="body-section">
+        <div class="card">
+            <div class="body-card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Informations du catéchumène -->
+                        <div *ngIf="catechumene?.kt_matricule" class="ref-info mt-2">
+                            <div class="info-label">Matricule:</div>
+                            <div class="info-value">{{ catechumene?.kt_matricule }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_lastname" class="ref-info mt-2">
+                            <div class="info-label">Nom:</div>
+                            <div class="info-value">{{ catechumene?.kt_lastname }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_firstname" class="ref-info mt-2">
+                            <div class="info-label">Prénom:</div>
+                            <div class="info-value">{{ catechumene?.kt_firstname }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_gender" class="ref-info mt-2">
+                            <div class="info-label">Genre:</div>
+                            <div class="info-value">{{ catechumene?.kt_gender }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_birth_date" class="ref-info mt-2">
+                            <div class="info-label">Date de naissance:</div>
+                            <div class="info-value">{{ catechumene?.kt_birth_date | date: 'dd/MM/yyyy' }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_address" class="ref-info mt-2">
+                            <div class="info-label">Adresse:</div>
+                            <div class="info-value">{{ catechumene?.kt_address }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_mobile" class="ref-info mt-2">
+                            <div class="info-label">Téléphone:</div>
+                            <div class="info-value">{{ catechumene?.kt_mobile }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_email" class="ref-info mt-2">
+                            <div class="info-label">Email:</div>
+                            <div class="info-value">{{ catechumene?.kt_email }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_creation_date" class="ref-info mt-2">
+                            <div class="info-label">Date d'inscription:</div>
+                            <div class="info-value">{{ catechumene?.kt_creation_date | date: 'dd/MM/yyyy' }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="photo-location">
+                            <img src="./assets/images/logos/stjoseph_img2.png" alt="Photo de l'église"
+                                class="stj-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Informations sur les parents -->
+    <section *ngIf="catechumene?.kt_father_firstname || catechumene?.kt_mother_firstname">
+        <h3>Informations sur les Parents</h3>
+        <div class="card">
+            <div class="body-card">
+                <!-- Père -->
+                <div *ngIf="catechumene?.kt_father_firstname">
+                    <h4>Père</h4>
+                    <div *ngIf="catechumene?.kt_father_lastname" class="ref-info mt-2">
+                        <div class="info-label">Nom:</div>
+                        <div class="info-value">{{ catechumene?.kt_father_lastname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_father_firstname" class="ref-info mt-2">
+                        <div class="info-label">Prénom:</div>
+                        <div class="info-value">{{ catechumene?.kt_father_firstname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_father_mobile" class="ref-info mt-2">
+                        <div class="info-label">Téléphone:</div>
+                        <div class="info-value">{{ catechumene?.kt_father_mobile }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_father_state" class="ref-info mt-2">
+                        <div class="info-label">État:</div>
+                        <div class="info-value">{{ catechumene?.kt_father_state }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_father_occupation" class="ref-info mt-2">
+                        <div class="info-label">Occupation:</div>
+                        <div class="info-value">{{ catechumene?.kt_father_occupation }}</div>
+                    </div>
+                </div>
+                <!-- Mère -->
+                <div *ngIf="catechumene?.kt_mother_firstname">
+                    <h4>Mère</h4>
+                    <div *ngIf="catechumene?.kt_mother_lastname" class="ref-info mt-2">
+                        <div class="info-label">Nom:</div>
+                        <div class="info-value">{{ catechumene?.kt_mother_lastname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_mother_firstname" class="ref-info mt-2">
+                        <div class="info-label">Prénom:</div>
+                        <div class="info-value">{{ catechumene?.kt_mother_firstname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_mother_mobile" class="ref-info mt-2">
+                        <div class="info-label">Téléphone:</div>
+                        <div class="info-value">{{ catechumene?.kt_mother_mobile }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_mother_state" class="ref-info mt-2">
+                        <div class="info-label">État:</div>
+                        <div class="info-value">{{ catechumene?.kt_mother_state }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_mother_occupation" class="ref-info mt-2">
+                        <div class="info-label">Occupation:</div>
+                        <div class="info-value">{{ catechumene?.kt_mother_occupation }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Informations sur le parrain ou la marraine -->
+    <section *ngIf="catechumene?.kt_godfather_firstname || catechumene?.kt_godmother_firstname">
+        <h3>Informations sur le Parrain/Marraine</h3>
+        <div class="card">
+            <div class="body-card">
+                <!-- Parrain -->
+                <div *ngIf="catechumene?.kt_godfather_firstname">
+                    <h4>Parrain</h4>
+                    <div *ngIf="catechumene?.kt_godfather_lastname" class="ref-info mt-2">
+                        <div class="info-label">Nom:</div>
+                        <div class="info-value">{{ catechumene?.kt_godfather_lastname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_godfather_firstname" class="ref-info mt-2">
+                        <div class="info-label">Prénom:</div>
+                        <div class="info-value">{{ catechumene?.kt_godfather_firstname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_godfather_mobile" class="ref-info mt-2">
+                        <div class="info-label">Téléphone:</div>
+                        <div class="info-value">{{ catechumene?.kt_godfather_mobile }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_godfather_confirm_date" class="ref-info mt-2">
+                        <div class="info-label">Date de confirmation:</div>
+                        <div class="info-value">{{ catechumene?.kt_godfather_confirm_date | date: 'dd/MM/yyyy' }}</div>
+                    </div>
+                </div>
+                <!-- Marraine -->
+                <div *ngIf="catechumene?.kt_godmother_firstname">
+                    <h4>Marraine</h4>
+                    <div *ngIf="catechumene?.kt_godmother_lastname" class="ref-info mt-2">
+                        <div class="info-label">Nom:</div>
+                        <div class="info-value">{{ catechumene?.kt_godmother_lastname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_godmother_firstname" class="ref-info mt-2">
+                        <div class="info-label">Prénom:</div>
+                        <div class="info-value">{{ catechumene?.kt_godmother_firstname }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_godmother_mobile" class="ref-info mt-2">
+                        <div class="info-label">Téléphone:</div>
+                        <div class="info-value">{{ catechumene?.kt_godmother_mobile }}</div>
+                    </div>
+                    <div *ngIf="catechumene?.kt_godmother_confirm_date" class="ref-info mt-2">
+                        <div class="info-label">Date de confirmation:</div>
+                        <div class="info-value">{{ catechumene?.kt_godmother_confirm_date | date: 'dd/MM/yyyy' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <section *ngIf="catechumene?.kt_birth_certificate">
+        <h3>Certificat de Naissance</h3>
+        <div class="card">
+            <div class="body-card">
+                <div class="ref-info mt-2">
+                    <div class="info-label">Certificat:</div>
+                    <div class="info-value">
+                        <button (click)="openBirthCertificate()" class="view-full-button">Voir le document complet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <div class="download-button-container">
+        <button (click)="downloadPage()" class="download-button">Télécharger la fiche</button>
+    </div>
+</div>

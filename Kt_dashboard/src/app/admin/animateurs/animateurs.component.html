@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="d-flex justify-content-between page-head-title mt-5">
+
+        <strong class="h2">Catechist</strong>
+      
+
+    </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-12">
+            <div class="table-responsive">
+                <table class="table mt-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">Matricule</th>
+                        <th scope="col">FirstName</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Section</th>
+                        <th scope="col">Mobile</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider" >
+                      <tr *ngFor="let catechiste of all_catechiste " [routerLink]="['/admin','catechiste-info', catechiste.c_uid]" style="cursor: pointer;">
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <img
+                                src="{{catechiste?.c_picture}}"
+                                alt=""
+                                style="width: 45px; height: 45px"
+                                class="rounded-circle"
+                                />
+                            <div class="ms-3">
+                              <p class="fw-bold mb-1">{{catechiste?.c_matricule}}</p> 
+                            </div>
+                          </div>
+                          </td>
+                        <td>{{catechiste?.c_firstname}}</td>
+                        <td>{{catechiste?.c_lastname}}</td>
+                          <td>{{catechiste?.c_section}}</td>
+                        <td>{{catechiste?.c_mobile}}</td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                              <button class="btn" type="btn-link" style="color: #048004;" [routerLink]="['/admin','catechiste-info', catechiste.c_uid]" title="View">
+                                  <i class="fa-solid fa-eye"></i>
+                              </button>
+                              <button class="btn" type="btn-link" style="color: #046380;" title="Update" [routerLink]="['/admin','catechiste-info', catechiste.c_uid]" >
+                                  <i class="fa-solid fa-pencil"></i>
+                              </button>
+                              <button class="btn" type="btn-link" style="color: #be0a0a;" title="Delete" (click)="delCatechiste(catechiste?.c_uid, catechiste?.c_matricule)">
+                                  <i class="fa-solid fa-trash-can"></i>
+                              </button>
+                            </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+        </div>
+
+</div>

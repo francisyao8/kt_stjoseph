@@ -1,0 +1,243 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.header-section{
+    border: 1px solid #002556;
+    border-radius: 15px;
+    width: 100%;
+    margin: auto;
+}
+/* Header Styles */
+.header {
+    text-align: center;
+   
+}
+
+
+.logo {
+    width: 80px; /* Diminuer la taille du logo */
+}
+
+.logo-text {
+    font-size: 24px;
+    color: #002556;
+    margin-top: 10px;
+    font-weight: bold; /* Rendre le texte en gras */
+}
+
+
+/* Title Styles */
+.title {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    top: 10px;
+    background-color: #cccccc91;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.title h3 {
+    font-weight: bold; /* Rendre le texte en gras */
+    font-size: 30px;
+    color: #002556;
+}
+
+/* Progress Container Styles */
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    position: relative;
+    top: 50px;
+}
+
+
+
+/* Card Styles */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.body-card-title {
+    font-size: 20px;
+    color: #002556;
+    margin-bottom: 20px;
+    font-weight: bold; /* Rendre le texte en gras */
+}
+
+
+.img-fluid {
+    height: 150px;
+    width: 150px;
+    position: relative;
+    top: 40px;
+    margin-left: 140px;
+    
+}
+
+.ref-info {
+    display: flex;
+    justify-content: space-between; /* Aligne les éléments enfants aux extrémités */
+    padding: 5px 0;
+}
+
+.info-label {
+
+    margin-right: 10px; /* Espacement entre le label et la valeur */
+}
+
+.info-value {
+    text-align: end; /* Aligne le texte à droite */
+    font-weight: bold;
+}
+
+.body-section {
+    position: relative;
+    bottom: 60px;
+}
+
+
+.btn-prev {
+    background-color: #cccccc91;
+    color: #002556;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .btn-prev:hover {
+    background-color: #002556;
+    color: #ffffff;
+  }
+
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .logo {
+        width: 50px; /* Réduit la taille du logo pour les écrans plus petits */
+    }
+
+    .logo-text {
+        font-size: 18px; /* Réduit la taille du texte pour les écrans plus petits */
+    }
+
+    .title h3 {
+        font-size: 20px; /* Réduit la taille du titre pour les écrans plus petits */
+    }
+
+ 
+
+    .body-card-title {
+        font-size: 25px; /* Réduit la taille du titre pour les écrans plus petits */
+    }
+
+    .img-fluid {
+        height: 150px;
+        width: 150px;
+        position: relative;
+        right: 72%;
+        top: 10%;
+    }
+
+    .body-section {
+        position: relative;
+        bottom: 60px;
+    }
+
+    .qr-location {
+        margin: auto;
+        width: 50%;
+    }
+  
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 10px; /* Réduit le padding pour les petits écrans */
+    }
+
+    .logo-text {
+        font-size: 18px; /* Réduit la taille du texte pour les très petits écrans */
+    }
+
+    .title h3 {
+        font-size: 18px; /* Réduit la taille du titre pour les très petits écrans */
+    }
+
+    .progress-step {
+        width: 40px; /* Réduit la taille des étapes pour les très petits écrans */
+        height: 40px;
+        font-size: 18px; /* Réduit la taille du texte à l'intérieur des étapes */
+    }
+
+    .body-card-title {
+        font-size: 25px; /* Réduit la taille du titre pour les très petits écrans */
+    }
+
+    .img-fluid {
+        height: 150px;
+        width: 150px;
+        position: relative;
+        right: 72%;
+        top: 10%;
+        
+    }
+    .qr-location {
+        margin: auto;
+        width: 50%;
+    }
+}
+ 
+
+@media (max-width: 375px) {
+    .container {
+        padding: 10px; /* Réduit le padding pour les petits écrans */
+    }
+
+    .logo-text {
+        font-size: 16px; /* Réduit la taille du texte pour les très petits écrans */
+    }
+
+    .title h3 {
+        font-size: 18px; /* Réduit la taille du titre pour les très petits écrans */
+    }
+
+    .progress-step {
+        width: 40px; /* Réduit la taille des étapes pour les très petits écrans */
+        height: 40px;
+        font-size: 18px; /* Réduit la taille du texte à l'intérieur des étapes */
+    }
+
+    .body-card-title {
+        font-size: 25px; /* Réduit la taille du titre pour les très petits écrans */
+    }
+
+    .img-fluid {
+        height: 150px;
+        width: 150px;
+        position: relative;
+        right: 72%;
+        top: 10%;
+        
+    }
+    .qr-location {
+        margin: auto;
+        width: 50%;
+    }
+}

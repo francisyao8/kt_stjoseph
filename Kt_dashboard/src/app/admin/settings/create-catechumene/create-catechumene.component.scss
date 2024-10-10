@@ -1,0 +1,108 @@
+/* CSS pour le formulaire visible */
+.card-registration {
+    background-color: rgba(255, 255, 255, 0.8); /* Couleur d'arrière-plan légère avec transparence */
+    padding: 20px; /* Espace autour du formulaire pour le rendre visible */
+    position: relative; /* Assurez-vous que le formulaire est positionné correctement */
+    z-index: 1; /* Place le formulaire au-dessus du fond flouté */
+  }
+
+  .image_place {
+    position: relative;
+    justify-content: end;
+    display: flex;
+}
+
+.img_stj {
+    width: 200px;
+    height: 100%;
+    position: relative;
+    top: 8px;
+    right: 10px;
+}
+  
+  
+  /* Style pour cacher l'input de type fichier */
+  .picture input[type="file"] {
+      display: none;
+    }
+    
+    /* Style du label pour le champ d'envoi de fichier */
+    .picture {
+      display: inline-block;
+      height: 150px;
+      width: 150px;
+      border-radius: 6px;
+      border: 1px dashed #999;
+      text-align: center;
+      line-height: 150px;
+      cursor: pointer;
+    }
+    
+    /* Style du label lorsqu'il est survolé */
+    .picture:hover {
+      color: saddlebrown;
+      border: 1px dashed #864328;
+    }
+    
+      /* Style pour l'image prévisualisée */
+  #preview {
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+    border-radius: 6px;
+    border: 1px dashed #999;
+    text-align: center;
+    line-height: 150px;
+    cursor: pointer;
+  }
+  
+  /* Style pour cacher l'input de type fichier */
+  .certificate-file input[type="file"] {
+    display: none;
+  }
+  
+  /* Style du label pour le champ d'envoi de fichier */
+  .certificate-file label {
+    display: inline-block;
+    height: 100px; 
+    width: 200px; 
+    border-radius: 6px;
+    border: 2px dashed #999; 
+    text-align: center;
+    line-height: 100px; 
+    cursor: pointer;
+  }
+  
+  /* Style du label lorsqu'il est survolé */
+  .certificate-file label:hover {
+    color: saddlebrown;
+    border: 2px dashed #864328; /* Bordure survolée plus épaisse */
+  }
+  
+  .display-file-name {
+    display: inline-block;
+    height: 100px; 
+    width: 200px; 
+    border-radius: 6px;
+    border: 2px dashed #999; 
+    text-align: center;
+    line-height: 100px; 
+    cursor: pointer;
+    overflow: hidden; /* Pour cacher le texte dépassant */
+    white-space: nowrap; /* Pour empêcher le texte de passer à la ligne */
+    text-overflow: ellipsis; /* Pour ajouter des points de suspension à la fin du texte qui dépasse */
+  }
+  
+  .display-file-name {
+    position: relative;
+  }
+  
+  .delete-button {
+    position: absolute;
+    bottom: 30px; /* Ajuster la position verticale */
+    right: 5px; /* Ajuster la position horizontale */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: red;
+  }

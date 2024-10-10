@@ -1,0 +1,21 @@
+.bg-image-vertical {
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+  }
+  
+  .card {
+    position: relative;
+    justify-content: center;
+    bottom: 15%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+  @media (min-width: 1025px) {
+  .h-custom-2 {
+  height: 100%;
+  }
+  }

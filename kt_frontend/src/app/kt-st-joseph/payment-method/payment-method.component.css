@@ -1,0 +1,26 @@
+.img-fluid{
+    width: 100px;
+    height: 100px;
+}
+
+.amount-location {
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/* Pour les écrans laptop */
+@media only screen and (min-width: 1024px) and (max-width: 1440px) {
+   
+}
+
+/* Pour les écrans de bureau */
+@media only screen and (min-width: 1440px) and (max-width: 2560px) {
+   
+}
+
+/* Pour les tablettes */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  
+}

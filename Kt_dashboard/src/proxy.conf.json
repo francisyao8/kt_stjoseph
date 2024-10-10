@@ -1,0 +1,20 @@
+{
+    "/api/*": {
+        "target": "http://127.0.0.1:5000/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "router": {
+            "localhost:4200" : "http://127.0.0.1:5000/"
+        }
+    },
+    "/oauth/*": {
+        "target": "http://127.0.0.1:5000/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "router": {
+            "localhost:4200" : "http://127.0.0.1:5000/"
+        }
+    }         
+}

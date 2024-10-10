@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="band"></div>
+    <!-- En-tête avec le logo -->
+    <div class="row">
+      <div class="col-md-2 mt-2">
+        <a routerLink="/kt-st-joseph/home">
+          <img src="./assets/logo/stj.png" alt="Logo" class="img-fluid">
+        </a>
+      </div>
+      <div class="col-md-4 mt-md-5 mt-3">
+        <!-- Trois phrases personnalisées -->
+        <h4 class="mb-0">Paroisse Saint Joseph Artisan</h4>
+        <h4>Riviera Bonoumin</h4>
+      </div>
+    </div>
+    <div class="row ms-md-5 ms-3">
+      <strong>929J+HWF, Abidjan, Cocody Riviera Bonoumin <br>+225 0777972939</strong>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="ref-info mt-3">
+          <label>Matricule: </label>
+          <strong> {{ catechumene_info?.kt_matricule }}</strong>
+        </div>
+        <div class="ref-info mt-3">
+          <label>Lastname: </label>
+          <strong> {{ catechumene_info?.kt_lastname }}</strong>
+        </div>
+        <div class="ref-info mt-3">
+          <label>Firstname: </label>
+          <strong> {{ catechumene_info?.kt_firstname }}</strong>
+        </div>
+        <div class="ref-info mt-3">
+          <label>Section: </label>
+          <strong> {{ catechumene_info?.kt_section }}</strong>
+        </div>
+        <div class="ref-info mt-3">
+          <label>Level: </label>
+          <strong> {{ catechumene_info?.kt_level }}</strong>
+        </div>
+        <div class="ref-info mt-3">
+          <label>Mobile: </label>
+          <strong> {{ catechumene_info?.kt_mobile }}</strong>
+        </div>
+      </div>
+      <div class="col-md-3 mt-md-4 mt-3">
+        <div id="qr-code-container">
+          <canvas id="qr-code"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="payment-info mt-5">
+      <table class="table border-top">
+        <thead>
+          <tr>
+            <th scope="col">Registration number</th>
+            <th scope="col">Registration date</th>
+            <th scope="col">Registration reference</th>
+            <th scope="col">Payment method</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#{{ catechumene_info?.kt_creation_number }}</td>
+            <td>{{ catechumene_info?.kt_creation_date }}</td>
+            <td>{{ catechumene_info?.kt_ref_creation }}</td>
+            <td>{{ catechumene_info?.kt_payment_methode }}</td>
+            <td>{{ catechumene_info?.kt_amount }} <span>XOF</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

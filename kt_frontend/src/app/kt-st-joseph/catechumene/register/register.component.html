@@ -1,0 +1,501 @@
+<div class="container">
+    <section class="header-section">
+      <div class="header">
+        <div class="body-header">
+          <img src="./assets/logo/stj.png" alt="Logo" class="logo">
+          <h2 class="logo-text">PAROISSE ST JOSEPH ARTISAN RIVIERA BONOUMIN</h2>
+        </div>
+      </div>
+    </section>
+  
+    <div class="wrapper">
+      <div class="title">
+        <h3>Formulaire d'inscription</h3>
+      </div>
+      <div class="progress-container">
+        <div class="progress-step" [class.progress-step-active]="currentStep === 1">1</div>
+        <div class="progress-step" [class.progress-step-active]="currentStep === 2">2</div>
+        <div class="progress-step" [class.progress-step-active]="currentStep === 3">3</div>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <div class="body-card">
+          <!-- Étape 1 -->
+          <form [formGroup]="register_form" (submit)="submitForm()">
+           
+          <div *ngIf="currentStep === 1">
+            <h3 class="body-card-title">Informations de base</h3>
+             
+              <div class="row mb-3">
+                <div class="col-md-3">
+                  <div class="dropify-location" id="picture">
+                    <input name="file2" type="file" name="kt_picture" formControlName="kt_picture"
+                      id="kt_picture" class="dropify" data-height="160" style="font-size: large !important;" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="firstname" class="form-label">Prénom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_firstname" formControlName="kt_firstname"
+                    id="firstname" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="lastname" class="form-label">Nom de famille <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_lastname" formControlName="kt_lastname" id="lastname"
+                    required>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="birth-date" class="form-label">Date de naissance <span class="text-danger">*</span></label>
+                  <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+                    <span class="input-group-text input-group-addon bg-transparent" data-toggle>
+                      <i class="fa-regular fa-calendar-days"></i>
+                    </span>
+                    <input type="date" class="form-control bg-transparent" id="flatpickr-date" placeholder="Select date"
+                      data-input name="kt_birth_date" formControlName="kt_birth_date">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="mobile" class="form-label">Téléphone <span class="text-danger">*</span></label>
+                  <input type="tel" class="form-control" name="kt_mobile" formControlName="kt_mobile" id="mobile"
+                    placeholder="(000) 00-000-000">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="address" class="form-label">Adresse <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_address" formControlName="kt_address" id="address">
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" name="kt_email" formControlName="kt_email" id="email"
+                    placeholder="Ex: monnom@gmail.com">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                  <h6 class="mb-0 me-4" class="form-label">Genre <span class="text-danger">*</span>:</h6>
+                  <div class="form-check form-check-inline mb-2 ms-2">
+                    <input class="form-check-input" type="radio" formControlName="kt_gender" value="female"
+                      name="kt_gender" id="femaleGender">
+                    <label class="form-check-label" for="femaleGender">Femme</label>
+                  </div>
+                  <div class="form-check form-check-inline mb-2 me-4">
+                    <input class="form-check-input" type="radio" formControlName="kt_gender" value="male" name="kt_gender"
+                      id="maleGender">
+                    <label class="form-check-label" for="maleGender">Homme</label>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <h3 class="body-card-title">Informations sur la catéchèse</h3>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="section" class="form-label">Section de catéchisme <span
+                        class="text-danger">*</span></label>
+                    <select class="form-select" name="kt_section" formControlName="kt_section"
+                      aria-label="Default select example" id="section">
+                      <option *ngFor="let item of catechesis_section" [value]="item?.catechesis_section">
+                        {{item?.catechesis_section}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="level" class="form-label">Niveau de catéchisme <span class="text-danger">*</span></label>
+                    <select class="form-select" name="kt_level" formControlName="kt_level" id="level">
+                      <option *ngFor="let item of level_of_catechism" [value]="item?.level_of_catechism">
+                        {{item?.level_of_catechism}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Bébé baptisé <span class="text-danger">*</span> :</h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_baptized_baby" value="yes"
+                        name="kt_baptized_baby" id="kt_bby">
+                      <label class="form-check-label" for="kt_bby">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_baptized_baby" value="no"
+                        name="kt_baptized_baby" id="kt_bbn">
+                      <label class="form-check-label" for="kt_bbn">Non</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-12">
+                    <div class="form-outline">
+                      <h6 class="form-label" for="birthCertificate">Acte de naissance <span class="text-danger">*</span>
+                      </h6>
+                      <div class="dropify-location">
+                        <input name="file1" type="file" name="kt_birth_certificate" formControlName="kt_birth_certificate"
+                          id="birthCertificate" class="dropify" data-height="100" style="font-size: large !important;" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-prev rounded-pill me-3 mt-3" routerLink="/kt-st-joseph/home">Retour</button>
+                <button type="submit" class="btn btn-next rounded-pill mt-3" (click)="NextStep()">Suivant</button>
+              </div>
+          
+          </div>
+  
+          <!-- Étape 2 -->
+          <div *ngIf="currentStep === 2">
+            <h3 class="body-card-title">Informations Parentales</h3>
+          
+  
+              <div class="row ">
+                <div class="parent-type">Père</div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="fatherfirstname" class="form-label">Prénom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_father_firstname" formControlName="kt_father_firstname"
+                    id="fatherfirstname">
+                </div>
+                <div class="col-md-6">
+                  <label for="lastname" class="form-label">Nom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_father_lastname" formControlName="kt_father_lastname"
+                    id="lastname">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="nationality">Nationalité</label>
+                  <input type="text" id="nationality" class="form-control" name="kt_father_nationality"
+                    formControlName="kt_father_nationality">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="state">État</label>
+                  <input type="text" id="state" class="form-control" name="kt_father_state"
+                    formControlName="kt_father_state">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="occupation">Profession</label>
+                  <input type="text" id="occupation" class="form-control" name="kt_father_occupation"
+                    formControlName="kt_father_occupation">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="mobile">Téléphone <span class="text-danger">*</span></label>
+                  <input type="tel" id="mobile" class="form-control" name="kt_father_mobile"
+                    formControlName="kt_father_mobile" placeholder="(000) 00-000-000">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Civil: </h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_father_civil_marriage" value="yes"
+                        name="kt_father_civil_marriage" id="kt_fcmy">
+                      <label class="form-check-label" for="kt_fcmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_father_civil_marriage" value="no"
+                        name="kt_father_civil_marriage" id="kt_fcmn">
+                      <label class="form-check-label" for="kt_fcmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Religieux: </h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_father_religious_marriage"
+                        value="yes" name="kt_father_religious_marriage" id="kt_frmy">
+                      <label class="form-check-label" for="kt_frmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_father_religious_marriage"
+                        value="no" name="kt_father_religious_marriage" id="kt_frmn">
+                      <label class="form-check-label" for="kt_frmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row ">
+                <div class="parent-type">Mère</div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="motherfirstname" class="form-label">Prénom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_mother_firstname" formControlName="kt_mother_firstname"
+                    id="motherfirstname">
+                </div>
+                <div class="col-md-6">
+                  <label for="lastname" class="form-label">Nom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_mother_lastname" formControlName="kt_mother_lastname"
+                    id="lastname">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="nationality">Nationalité</label>
+                  <input type="text" id="nationality" class="form-control" name="kt_mother_nationality"
+                    formControlName="kt_mother_nationality">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="state">État</label>
+                  <input type="text" id="state" class="form-control" name="kt_mother_state"
+                    formControlName="kt_mother_state">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="occupation">Profession</label>
+                  <input type="text" id="occupation" class="form-control" name="kt_mother_occupation"
+                    formControlName="kt_mother_occupation">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="mobile">Téléphone <span class="text-danger">*</span></label>
+                  <input type="tel" id="mobile" class="form-control" name="kt_mother_mobile"
+                    formControlName="kt_mother_mobile" placeholder="(000) 00-000-000">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Civil: </h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_mother_civil_marriage" value="yes"
+                        name="kt_mother_civil_marriage" id="kt_mcmy">
+                      <label class="form-check-label" for="kt_mcmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_mother_civil_marriage" value="no"
+                        name="kt_mother_civil_marriage" id="kt_mcmn">
+                      <label class="form-check-label" for="kt_mcmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Religieux: </h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_mother_religious_marriage"
+                        value="yes" name="kt_mother_religious_marriage" id="kt_mrmy">
+                      <label class="form-check-label" for="kt_mrmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_mother_religious_marriage"
+                        value="no" name="kt_mother_religious_marriage" id="kt_mrmn">
+                      <label class="form-check-label" for="kt_mrmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="text-center">
+                <button type="button" class="btn btn-prev rounded-pill me-3 mt-3" (click)="PreviousStep()">Précédent</button>
+                <button type="submit" class="btn btn-next rounded-pill mt-3" (click)="NextStep()">Suivant</button>
+              </div>
+       
+          </div>
+  
+          <!-- Étape 3 -->
+          <div *ngIf="currentStep === 3">
+            <h3 class="body-card-title">Parrain or Marraine</h3>
+            
+  
+              <div class="row">
+                <div class="parent-type">Parrain</div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="godfatherfirstname" class="form-label">Prénom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_godfather_firstname"
+                    formControlName="kt_godfather_firstname" id="godfatherfirstname">
+                </div>
+                <div class="col-md-6">
+                  <label for="lastname" class="form-label">Nom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_godfather_lastname"
+                    formControlName="kt_godfather_lastname" id="lastname">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="confirmationdate">Date de Confirmation</label>
+                  <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+                    <span class="input-group-text input-group-addon bg-transparent" data-toggle>
+                      <i class="fa-regular fa-calendar-days"></i>
+                    </span>
+                    <input type="text" class="form-control bg-transparent" name="kt_godfather_confirm_date"
+                      formControlName="kt_godfather_confirm_date" id="flatpickr-date" placeholder="Sélectionnez une date"
+                      data-input>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="palceOfComfirmation">Lieu de Confirmation</label>
+                  <input type="text" id="palceOfComfirmation" class="form-control" name="kt_godfather_confirm_place"
+                    formControlName="kt_godfather_confirm_place" />
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="occupation">Profession</label>
+                  <input type="text" id="occupation" class="form-control" name="kt_godfather_occupation"
+                    formControlName="kt_godfather_occupation" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="mobile">Téléphone</label>
+                  <input type="tel" id="mobile" class="form-control" name="kt_godfather_mobile"
+                    formControlName="kt_godfather_mobile" placeholder="(000) 00-000-000" />
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Civil :</h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_godfather_civil_marriage"
+                        value="yes" name="kt_godfather_civil_marriage" id="kt_gfmy" />
+                      <label class="form-check-label" for="kt_gfmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_godfather_civil_marriage"
+                        value="no" name="kt_godfather_civil_marriage" id="kt_gfmn" />
+                      <label class="form-check-label" for="kt_gfmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Religieux :</h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_godfather_religious_marriage"
+                        value="yes" name="kt_godfather_religious_marriage" id="kt_grmy" />
+                      <label class="form-check-label" for="kt_grmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_godfather_religious_marriage"
+                        value="no" name="kt_godfather_religious_marriage" id="kt_grmn" />
+                      <label class="form-check-label" for="kt_grmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row ">
+                <div class="parent-type">Marraine</div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="motherfirstname" class="form-label">Prénom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_godmother_firstname"
+                    formControlName="kt_godmother_firstname" id="godmotherfirstname">
+                </div>
+                <div class="col-md-6">
+                  <label for="lastname" class="form-label">Nom <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="kt_godmother_lastname"
+                    formControlName="kt_godmother_lastname" id="lastname">
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="form-outline">
+                    <label class="form-label" for="confirmationdate">Date de Confirmation </label>
+                    <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+                      <span class="input-group-text input-group-addon bg-transparent" data-toggle>
+                        <i class="fa-regular fa-calendar-days"></i>
+                      </span>
+                      <input type="text" class="form-control bg-transparent" name="kt_godmother_confirm_date"
+                        formControlName="kt_godmother_confirm_date" id="flatpickr-date" placeholder="Select date"
+                        data-input>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-outline">
+                    <label class="form-label" for="palceOfComfirmation">Lieu de Confirmation</label>
+                    <input type="text" id="palceOfComfirmation" class="form-control" name="kt_godmother_confirm_place"
+                      formControlName="kt_godmother_confirm_place" />
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="occupation">Profession</label>
+                  <input type="text" id="occupation" class="form-control" name="kt_godmother_occupation"
+                    formControlName="kt_godmother_occupation" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="mobile">Téléphone <span class="text-danger">*</span></label>
+                  <input type="tel" id="mobile" class="form-control" name="kt_godmother_mobile"
+                    formControlName="kt_godmother_mobile" placeholder="(000) 00-000-000" />
+                </div>
+              </div>
+  
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Civil: </h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_godmother_civil_marriage"
+                        value="yes" name="kt_godmother_civil_marriage" id="kt_gcmy" />
+                      <label class="form-check-label" for="kt_gcmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_godmother_civil_marriage"
+                        value="no" name="kt_godmother_civil_marriage" id="kt_gcmn" />
+                      <label class="form-check-label" for="kt_gcmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4" class="form-label">Mariage Religieux: </h6>
+                    <div class="form-check form-check-inline mb-2 ms-2">
+                      <input class="form-check-input" type="radio" formControlName="kt_godmother_religious_marriage"
+                        value="yes" name="kt_godmother_religious_marriage" id="kt_grmy" />
+                      <label class="form-check-label" for="kt_grmy">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 me-4">
+                      <input class="form-check-input" type="radio" formControlName="kt_godmother_religious_marriage"
+                        value="no" name="kt_godmother_religious_marriage" id="kt_grmn" />
+                      <label class="form-check-label" for="kt_grmn">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="text-center">
+                <button type="button" class="btn btn-prev rounded-pill me-3 mt-3" (click)="PreviousStep()">Précédent</button>
+  
+                <button type="submit" class="btn btn-next rounded-pill mt-3">
+  
+                  <span *ngIf="!isloading">S'inscrire</span>
+                  <span *ngIf="isloading" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  <span *ngIf="isloading" class="visually-hidden" role="status">Loading...</span>
+                </button>
+              </div>
+            </div>
+          </form>
+  
+        </div>
+      </div>
+    </section>
+  </div>

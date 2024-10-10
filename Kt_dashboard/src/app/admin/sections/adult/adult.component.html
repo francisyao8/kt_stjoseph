@@ -1,0 +1,223 @@
+<div class="container">
+  <!--  Row 1 -->
+
+  <div class="row">
+    <div class="settings mt-5">
+      <h1 class="settings-title mt-3">
+        <p class="fw-bold">Classe Adulte</p>
+      </h1>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" [class.active]="activeYear === '1st year'" (click)="updateActiveYear('1st year')"
+            aria-current="page" data-bs-toggle="tab" data-bs-target="#1st-year" type="button" role="tab"
+            aria-controls="1st-year" aria-selected="true" style="color:#002556;">1st year</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeYear === '2nd years'" (click)="updateActiveYear('2nd years')"
+            data-bs-toggle="tab" data-bs-target="#2nd-years" type="button" role="tab" aria-controls="2nd-years"
+            aria-selected="true" style="color:#002556;">2nd years</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeYear === '3rd years'" (click)="updateActiveYear('3rd years')"
+            data-bs-toggle="tab" data-bs-target="#3rd-years" type="button" role="tab" aria-controls="3rd-years"
+            aria-selected="true" style="color:#002556;">3rd years</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeYear === '4th years'" (click)="updateActiveYear('4th years')"
+            data-bs-toggle="tab" data-bs-target="#4th-years" type="button" role="tab" aria-controls="4th-years"
+            aria-selected="true" style="color:#002556;">4th years</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeYear === '5th years'" (click)="updateActiveYear('5th years')"
+            data-bs-toggle="tab" data-bs-target="#5th-years" type="button" role="tab" aria-controls="5th-years"
+            aria-selected="true" style="color:#002556;">5th years</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-content mt-4" id="myTabContent">
+    <!--1st year-->
+    <div class="tab-pane fade show active" id="1st-year" role="tabpanel" aria-labelledby="1st-year-tab">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive" *ngIf="catechumenesByYear[activeYear] && catechumenesByYear[activeYear].length > 0; else noData">
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">section</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Mobile</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let catechumene of catechumenesByYear[activeYear]" [routerLink]="['/admin','catechumene-info', catechumene?.kt_uid]" style="cursor: pointer;">
+                     <td>{{catechumene?.kt_matricule}}</td>
+                    <td>{{catechumene?.kt_lastname}}</td>
+                    <td>{{catechumene?.kt_firstname}}</td>
+                    <td>{{catechumene?.kt_section}}</td>
+                    <td>{{catechumene?.kt_level}}</td>
+                    <td>{{catechumene?.kt_mobile}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ng-template #noData>
+              <p class="text-center mt-3">No data available for {{ activeYear }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--2nd year-->
+    <div class="tab-pane fade" id="2nd-years" role="tabpanel" aria-labelledby="2nd-years-tab">
+      <div class="container">
+        <div class="row ">
+          <div class="col-12 mb-3">
+            <div class="table-responsive" *ngIf="catechumenesByYear[activeYear] && catechumenesByYear[activeYear].length > 0; else noData">
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">section</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Mobile</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let catechumene of catechumenesByYear[activeYear]" [routerLink]="['/admin','catechumene-info', catechumene?.kt_uid]" style="cursor: pointer;">
+                     <td>{{catechumene?.kt_matricule}}</td>
+                    <td>{{catechumene?.kt_lastname}}</td>
+                    <td>{{catechumene?.kt_firstname}}</td>
+                    <td>{{catechumene?.kt_section}}</td>
+                    <td>{{catechumene?.kt_level}}</td>
+                    <td>{{catechumene?.kt_mobile}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ng-template #noData>
+              <p class="text-center mt-3">No data available for {{ activeYear }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--adulte-->
+    <div class="tab-pane fade" id="3rd-years" role="tabpanel" aria-labelledby="3rd-years-tab">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive" *ngIf="catechumenesByYear[activeYear] && catechumenesByYear[activeYear].length > 0; else noData">
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">section</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Mobile</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let catechumene of catechumenesByYear[activeYear]" [routerLink]="['/admin','catechumene-info', catechumene?.kt_uid]" style="cursor: pointer;">
+                     <td>{{catechumene?.kt_matricule}}</td>
+                    <td>{{catechumene?.kt_lastname}}</td>
+                    <td>{{catechumene?.kt_firstname}}</td>
+                    <td>{{catechumene?.kt_section}}</td>
+                    <td>{{catechumene?.kt_level}}</td>
+                    <td>{{catechumene?.kt_mobile}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ng-template #noData>
+              <p class="text-center mt-3">No data available for {{ activeYear }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--4th years-->
+    <div class="tab-pane fade" id="4th-years" role="tabpanel" aria-labelledby="4th-years-tab">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive" *ngIf="catechumenesByYear[activeYear] && catechumenesByYear[activeYear].length > 0; else noData">
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">section</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Mobile</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let catechumene of catechumenesByYear[activeYear]" [routerLink]="['/admin','catechumene-info', catechumene?.kt_uid]" style="cursor: pointer;">
+                     <td>{{catechumene?.kt_matricule}}</td>
+                    <td>{{catechumene?.kt_lastname}}</td>
+                    <td>{{catechumene?.kt_firstname}}</td>
+                    <td>{{catechumene?.kt_section}}</td>
+                    <td>{{catechumene?.kt_level}}</td>
+                    <td>{{catechumene?.kt_mobile}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ng-template #noData>
+              <p class="text-center mt-3">No data available for {{ activeYear }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--5th years-->
+    <div class="tab-pane fade" id="5th-years" role="tabpanel" aria-labelledby="5th-years-tab">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive" *ngIf="catechumenesByYear[activeYear] && catechumenesByYear[activeYear].length > 0; else noData">
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">section</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Mobile</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let catechumene of catechumenesByYear[activeYear]" [routerLink]="['/admin','catechumene-info', catechumene?.kt_uid]" style="cursor: pointer;">
+                     <td>{{catechumene?.kt_matricule}}</td>
+                    <td>{{catechumene?.kt_lastname}}</td>
+                    <td>{{catechumene?.kt_firstname}}</td>
+                    <td>{{catechumene?.kt_section}}</td>
+                    <td>{{catechumene?.kt_level}}</td>
+                    <td>{{catechumene?.kt_mobile}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ng-template #noData>
+              <p class="text-center mt-3">No data available for {{ activeYear }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

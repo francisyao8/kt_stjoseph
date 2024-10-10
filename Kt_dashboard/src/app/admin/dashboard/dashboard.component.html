@@ -1,0 +1,110 @@
+<div class="container">
+   <h2 class="mt-5">Dashboard</h2>
+   <hr>
+  <div class="row">
+    <div class="col-md-8">
+      <!--1stcard-->
+      <div class="card position-relative mt-3">
+        <div class="card-body position-relative">
+          <strong class="h5">Registration History catechiste</strong>
+          <div class="history-table">
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Matricule</th>
+                  <th scope="col">Firstname</th>
+                  <th scope="col">Lastname</th>
+                  <th scope="col">Section</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr *ngFor="let catechiste of catechisteData">
+                  <td>{{ catechiste.c_matricule }}</td>
+                  <td>{{ catechiste.c_firstname }}</td>
+                  <td>{{ catechiste.c_lastname }}</td>
+                  <td>{{ catechiste.c_section }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card position-relative mt-3">
+        <div class="card-body position-relative">
+          <strong class="h5" >registration history catechumene</strong>
+          <div class="history-table">
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Matricule</th>
+                  <th scope="col">Lastname</th>
+                  <th scope="col">Firstname</th>
+                  <th scope="col">Section</th>
+                  <th scope="col">Level</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr *ngFor="let catechumene of catechumeneData">
+                  <td>{{ catechumene.kt_matricule }}</td>
+                  <td>{{ catechumene.kt_firstname }}</td>
+                  <td>{{ catechumene.kt_lastname }}</td>
+                  <td>{{ catechumene.kt_section }}</td>
+                  <td>{{ catechumene.kt_level }}</td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card position-relative mt-3">
+        <div class="card-body position-relative">
+          <strong class="h5">Catechumene Section Distribution</strong>
+          <canvas #catechumeneSectionChart width="400" height="400"></canvas>
+        </div>
+      </div>
+      
+      
+    </div>
+    <!--2ndcard-->
+    <div class="col-md-4">
+      <div class="card position-relative mt-3">
+        <div class="card-body">
+          <strong class="h5">Baptized Baby / Year Chart</strong>
+          <canvas #baptizedBabyChart width="400" height="400"></canvas>
+        </div>
+      </div>
+      
+      <!--3rdcard-->
+      <div class="card position-relative mt-3">
+        <div class="card-body">
+          <strong class="h5">Connection History</strong>
+          <div class="history-table">
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Matricule</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Date and Time</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr *ngFor="let admin of connectedAdmins;" >
+                  <td>{{ admin.u_matricule }}</td>
+                  <td>{{ admin.u_username }}</td>
+                  <td>{{ admin.u_last_login }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    
+  </div>
+
+ 

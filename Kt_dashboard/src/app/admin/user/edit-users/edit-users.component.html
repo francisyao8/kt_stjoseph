@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <h3 class="title mt-3">Edit Profil</h3>
+
+    <div class="page-body">
+        <div class="col-md-10">
+            <div class="img-place">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                    alt="Generic placeholder image" class="img-fluid" style="width: 180px; border-radius: 10px;" />
+            </div>
+            <p class="matricule"><strong>{{user_info?.u_matricule}}</strong></p>
+            <div class="display-user-info">
+                <form [formGroup]="update_form">
+
+                    <div class="col-md-12 d-flex">
+                        <div class="form-outline mb-4 col-md-6">
+                            <label class="form-label" for="formfirstname">Firstname</label>
+                            <input type="text" formControlName="u_firstname" name="u_firstname" id="formfirstname" class="form-control form-control-lg" />
+                        </div>
+
+                        <div class="form-outline mb-4 col-md-6 ms-3">
+                            <label class="form-label" for="formlastname">Lastname</label>
+                            <input type="text" formControlName="u_lastname" name="u_lastname" id="formlastname" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 d-flex">
+                        <div class="form-outline mb-4 col-md-6">
+                            <label class="form-label" for="formmobile">Mobile</label>
+                            <input type="tel" formControlName="u_mobile" name="u_mobile" id="formmobile" class="form-control form-control-lg" />
+                        </div>
+
+                        <div class="form-outline mb-4 col-md-6 ms-3">
+                            <label class="form-label" for="formadress">Address</label>
+                            <input type="text" formControlName="u_address" name="u_address" id="formadress" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 d-flex">
+                       
+                        <div class="form-outline mb-4 col-md-6">
+                            <label class="form-label" for="formrole">Role</label>
+                            <input type="text" formControlName="u_role" name="u_role" id="formrole" class="form-control form-control-lg" />
+                        </div>
+
+                        <div class="form-outline mb-4 col-md-6 ms-3">
+                            <label class="form-label" for="formusername">Username</label>
+                            <input type="text" formControlName="u_username" name="u_username" id="formusername" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 d-flex">
+                        
+                        <div class="form-outline mb-4 col-md-6">
+                            <label class="form-label" for="formemail"> Email</label>
+                            <input type="email" formControlName="u_email" name="u_email" id="formemail" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-light btn-block btn-lg gradient-custom-4 text-body me-3" (click)="goBack()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-block btn-lg gradient-custom-4 text-body" style="background-color: saddlebrown;">
+                            <span class="text-white" *ngIf="!isLoading" (click)="updateAdminInfo()">Save</span>
+                            <span *ngIf="isLoading">Loading...</span>
+                        </button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
