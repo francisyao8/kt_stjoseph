@@ -1,6 +1,7 @@
    # helpers/catechiste.py
 from flask import Flask, request, current_app
 from model.kt_stjoseph import kt_catechiste, Log, kt_users
+from helpers.admin_log import *
 from config.db import db
 import uuid
 from datetime import datetime
@@ -64,8 +65,11 @@ def createCatechiste():
         c_birth_date = datetime.strptime(c_birth_date_str, '%Y-%m-%d') if c_birth_date_str else None
         c_address = request.form.get('c_address')
 
-        created_by = request.form.get('user_id')
+        created_by = request.form.get('created_by')
         print("Created By:", created_by)
+        admin_name = request.form.get('admin_name')
+        print("Created By:", admin_name)
+        
 
         new_catechiste = kt_catechiste()
 
@@ -81,30 +85,14 @@ def createCatechiste():
         new_catechiste.c_birth_date = c_birth_date
         new_catechiste.c_address = c_address
         new_catechiste.created_by = created_by
+        new_catechiste.admin_name = admin_name
 
         try:
             db.session.add(new_catechiste)
             db.session.commit()
 
-            # Mettre à jour les logs si c'est un admin
-            if created_by:
-                admin_user = kt_users.query.filter_by(u_uid=created_by).first()
-                if admin_user:
-                    # Créer le log correctement
-                    new_log = Log(
-                        user_id=admin_user.u_uid,
-                        user_name=f"{admin_user.u_firstname} {admin_user.u_lastname}",
-                        action='Create Catechiste',
-                        target_type='Catechiste',
-                        target_id=new_catechiste.id,
-                        target_matricule=new_catechiste.c_matricule,
-                        target_fullname=f"{new_catechiste.c_firstname} {new_catechiste.c_lastname}",
-                        details='Catechiste created by admin'
-                    )
-                    
-                    db.session.add(new_log)
-                    db.session.commit()
-                    print("Log added successfully")  # Debugging message
+            create_log(created_by,admin_name,"creation","Catechiste",new_catechiste.c_uid,new_catechiste.c_matricule,f'{new_catechiste.c_firstname} {new_catechiste.c_lastname}')
+            print("Log added successfully") 
 
             response['status'] = 'success'
             response['message'] = 'Catechiste created successfully'
@@ -113,7 +101,7 @@ def createCatechiste():
 
         except Exception as e:
             db.session.rollback()  # Rollback on error
-            print("Error creating catechiste:", e)  # Debugging message
+            print("Error creating catechiste:", e)  
             error_msg = "Failed to create catechiste. "
             response['status'] = 'error'
             response['error'] = 'Unavailable'
@@ -309,44 +297,31 @@ def updateCatechiste():
 
 def deleteCatechiste():
     response = {}
-
-    # Récupérer les données JSON de la requête
     data = request.json
     c_uid = data.get('c_uid')
     c_matricule = data.get('c_matricule')
 
     if c_uid and c_matricule:
-        # Assurez-vous de récupérer un seul catéchiste avec filter_by(...).first()
         del_catechiste = kt_catechiste.query.filter_by(c_uid=c_uid, c_matricule=c_matricule).first()
 
         if del_catechiste:
             try:
-                # Ajouter l'enregistrement dans les logs si c'est un admin
                 if 'user_id' in data:
                     user_id = data.get('user_id')
                     admin_user = kt_users.query.filter_by(u_uid=user_id).first()
 
-                    # Vérification de l'utilisateur admin
                     if admin_user:
                         print(f"Admin user found: {admin_user.u_username}")
-
-                        new_log = Log(
-                            user_id=admin_user.u_uid,
-                            user_name=admin_user.u_username,
-                            action='Delete Catechiste',
-                            target_type='Catechiste',
-                            target_id=del_catechiste.c_uid,
-                            target_matricule=del_catechiste.c_matricule,
-                            target_fullname=f"{del_catechiste.c_firstname} {del_catechiste.c_lastname}",
-                            details='Catechiste deleted by admin'
-                        )
-
-                        db.session.add(new_log)
-                        db.session.commit()
+                        
+                        # Créer le log
+                        create_log(user_id, admin_user.u_username, "delete", "Catechiste", del_catechiste.c_uid, del_catechiste.c_matricule, f'{del_catechiste.c_firstname} {del_catechiste.c_lastname}')
                         print("Log added successfully")
                     else:
                         print("Admin user not found")
+                        response['status'] = 'error'
+                        response['message'] = 'Admin user not found'
 
+                # Supprimer le catéchiste
                 db.session.delete(del_catechiste)
                 db.session.commit()
 
@@ -354,9 +329,10 @@ def deleteCatechiste():
                 response['message'] = 'Catechiste deleted successfully'
 
             except Exception as e:
+                db.session.rollback()  # Annuler en cas d'erreur
                 print("Error deleting catechiste:", e)  
                 response['status'] = 'error'
-                response['error_message'] = 'Failed to delete'
+                response['message'] = 'Failed to delete catechiste'
                 response['error_description'] = str(e)
 
         else:
@@ -366,7 +342,9 @@ def deleteCatechiste():
         response['status'] = 'error'
         response['message'] = 'c_uid and c_matricule are required'
 
-    return response
+    return jsonify(response)
+
+
 
 
 

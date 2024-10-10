@@ -26,7 +26,7 @@ export class CatechumeneService {
         Authorization: ''
       })
     };
-    return this.http.post(this.apiUrl+"api/catechumene/ReadAllCatechumene",body, httpOptions)
+    return this.http.post(this.apiUrl+"api/catechumene/ReadSingleCatechumene",body, httpOptions)
 }
 
 readAllCatechumene(body: any) {
@@ -37,7 +37,7 @@ readAllCatechumene(body: any) {
     }),
     body: JSON.stringify(body)
   };
-  return this.http.get(this.apiUrl+"api/catechumene/ReadSingleCatechumene", httpOptions)
+  return this.http.get(this.apiUrl+"api/catechumene/ReadAllCatechumene", httpOptions)
 }
 
 readCatechumeneBySectionAndLevel(body: any) {

@@ -12,6 +12,9 @@ declare var $: any;
 export class AnimateursComponent implements OnInit {
   all_catechiste: any;
   uid: any;
+// @ts-ignore
+  userInfo: any = JSON.parse(sessionStorage.getItem('infoLogin'));
+  is_user_logged_in = !!$.cookie('isLoggedIn');
 
   constructor(private catechiste: CatechisteService, private _router: Router) { }
 
@@ -48,9 +51,11 @@ export class AnimateursComponent implements OnInit {
   }
 
   delCatechiste(uid: any, matricule: any) {
+    const userId = this.userInfo.user_id;  
     const body = {
       c_uid: uid,
       c_matricule: matricule,
+      user_id: userId
     }
     Swal.fire({
       title: 'Are you sure?',

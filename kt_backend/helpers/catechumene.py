@@ -2,6 +2,7 @@
 from flask import Flask, request, current_app
 from model.kt_stjoseph import kt_catechumene, Log, kt_users
 from config.db import db
+from helpers.admin_log import *
 import uuid
 from datetime import datetime
 from werkzeug.utils import secure_filename
@@ -128,7 +129,10 @@ def createCatechumene():
     kt_godmother_civil_marriage = request.form.get('kt_godmother_civil_marriage')
     kt_godmother_religious_marriage = request.form.get('kt_godmother_religious_marriage')
     
-    created_by = request.form.get('user_id')
+    created_by = request.form.get('created_by')
+    print("Created By:", created_by)
+    admin_name = request.form.get('admin_name')
+    print("Created By:", admin_name)
 
     new_catechumene = kt_catechumene()
 
@@ -177,28 +181,15 @@ def createCatechumene():
     new_catechumene.kt_godmother_civil_marriage = kt_godmother_civil_marriage
     new_catechumene.kt_godmother_religious_marriage = kt_godmother_religious_marriage
     new_catechumene.kt_birth_certificate = kt_birth_certificate
+    new_catechumene.created_by = created_by
+    new_catechumene.admin_name = admin_name
 
     try:
         db.session.add(new_catechumene)
         db.session.commit()
 
-        # Mettre à jour les logs si c'est un admin
-        if created_by:
-            admin_user = kt_users.query.filter_by(u_uid=created_by).first()
-            if admin_user:
-                new_log = Log()
-                new_log.user_id=admin_user.u_uid,
-                new_log.user_name= admin_user.username,
-                new_log.action='Create Catechiste',
-                new_log.target_type='Catechiste',
-                new_log.target_id=new_catechumene.id,
-                new_log.target_matricule=new_catechumene.c_matricule,
-                new_log.target_fullname=f"{new_catechumene.c_firstname} {new_catechumene.c_lastname}",
-                new_log.details='Catechiste created by admin'
-                
-                db.session.add(new_log)
-                db.session.commit()
-                print("Log added successfully")  # Debugging message
+        create_log(created_by,admin_name,"creation","Catechumene",new_catechumene.kt_uid,new_catechumene.kt_matricule,f'{new_catechumene.kt_firstname} {new_catechumene.kt_lastname}')
+        print("Log added successfully") 
 
         response['status'] = 'success'
         response['message'] = 'catechumene created successfully'

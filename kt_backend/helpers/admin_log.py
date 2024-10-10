@@ -1,4 +1,4 @@
-from flask import Flask, request, current_app
+from flask import Flask, request, current_app,jsonify
 from model.kt_stjoseph import *
 from config.db import *
 import uuid
@@ -12,38 +12,25 @@ from werkzeug.utils import secure_filename
 
 
 
-def create_log():
+def create_log(created_by, admin_name, action, target_type, target_id, target_matricule, target_fullname):
     try:
-        data = request.get_json()
-        
-        # Extraire les données du corps de la requête
-        user_id = data.get('user_id')
-        user_name = data.get('user_name')
-        action = data.get('action')
-        target_type = data.get('target_type')
-        target_id = data.get('target_id')
-        target_matricule = data.get('target_matricule')
-        target_fullname = data.get('target_fullname')
-        details = data.get('details')
-
-
         new_log = Log(
-            user_id=user_id,
-            user_name=user_name,
+            created_by=created_by,
+            admin_name=admin_name,
             action=action,
             target_type=target_type,
             target_id=target_id,
             target_matricule=target_matricule,
             target_fullname=target_fullname,
-            details=details
         )
 
         db.session.add(new_log)
         db.session.commit()
+        print("Log created successfully")  # Journal pour débogage
 
-        return jsonify({'message': 'Log created successfully'}), 201
-    
     except Exception as e:
+        db.session.rollback()  # Annuler les changements en cas d'erreur
+        print("Error creating log:", e)  # Journal pour débogage
         return jsonify({'error': str(e)}), 400
 
 

@@ -159,15 +159,14 @@ class kt_catechumene(db.Model):
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     log_uid = db.Column(db.String(128), unique=True, default=lambda: str(uuid.uuid4()))
-    user_id = db.Column(db.String(128), db.ForeignKey('kt_users.u_uid'))
-    user_name = db.Column(db.String(128), nullable=False)
+    created_by = db.Column(db.String(128), db.ForeignKey('kt_users.u_uid'))
+    admin_name = db.Column(db.String(128), nullable=False)
     action = db.Column(db.String(50), nullable=False)
     target_type = db.Column(db.String(50), nullable=False)
-    target_id = db.Column(db.Integer, nullable=False)
+    target_id = db.Column(db.String(128), nullable=False)  # Change here
     target_matricule = db.Column(db.String(20), nullable=False)
     target_fullname = db.Column(db.String(128), nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
-    details = db.Column(db.Text, nullable=True)
 
     def as_dict(self):
         return {c.name: str(getattr(self, c.name)) for c in self.__table__.columns}

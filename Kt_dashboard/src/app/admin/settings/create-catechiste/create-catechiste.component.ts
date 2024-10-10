@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 
 declare var $: any;
 declare const flatpickr: any;
+
 @Component({
   selector: 'app-create-catechiste',
   templateUrl: './create-catechiste.component.html',
@@ -15,9 +16,10 @@ export class CreateCatechisteComponent implements OnInit, AfterViewInit {
   @ViewChild('preview') previewImage!: ElementRef;
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-    //@ts-ignore
-userInfo:any = JSON.parse(sessionStorage.getItem('infoLogin'))
-is_user_logged_in = !!$.cookie('isLoggedIn');
+  // Récupérer les informations de session
+  // @ts-ignore
+  userInfo: any = JSON.parse(sessionStorage.getItem('infoLogin'));
+  is_user_logged_in = !!$.cookie('isLoggedIn');
 
   data: any;
   selectedImage: boolean = false;
@@ -30,9 +32,7 @@ is_user_logged_in = !!$.cookie('isLoggedIn');
     private catechiste: CatechisteService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router
-  ) { }
-
-
+  ) {}
 
   register_form = new FormGroup({
     c_uid: new FormControl(null),
@@ -46,7 +46,9 @@ is_user_logged_in = !!$.cookie('isLoggedIn');
     c_address: new FormControl(null, Validators.required),
     c_gender: new FormControl(null, Validators.required),
     c_seniority: new FormControl(null, Validators.required),
-    c_section: new FormControl(null, Validators.required)
+    c_section: new FormControl(null, Validators.required),
+    created_by: new FormControl(this.userInfo?.u_uid, Validators.required),
+    admin_name: new FormControl(this.userInfo?.u_firstname + ' ' + this.userInfo?.u_lastname, Validators.required) 
   });
 
   cat_section = [
@@ -70,7 +72,6 @@ is_user_logged_in = !!$.cookie('isLoggedIn');
   ];
 
   ngAfterViewInit() {
-
     flatpickr('#flatpickr-date', {
       dateFormat: 'Y-m-d',
       defaultDate: 'today'
@@ -82,13 +83,12 @@ is_user_logged_in = !!$.cookie('isLoggedIn');
 
   openFileInput() {
     if (this.fileInput) {
-      this.fileInput.nativeElement.click(); // Ouvre la boîte de dialogue de sélection de fichier
+      this.fileInput.nativeElement.click();
     } else {
       console.error('fileInput is not available yet');
     }
   }
 
-  
   onPreviewImage(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -112,7 +112,8 @@ is_user_logged_in = !!$.cookie('isLoggedIn');
     this.isloading = true;
     const formData: FormData = new FormData();
     
-    const user_id = this.userInfo?.user_id;
+    // Récupérer l'ID de l'utilisateur depuis sessionStorage
+    const user_id = this.userInfo?.u_uid; // Utiliser u_uid au lieu de user_id
     console.log('User ID:', user_id); // Ajoutez cette ligne pour le débogage
     if (user_id) {
       formData.append('created_by', user_id);
@@ -120,23 +121,25 @@ is_user_logged_in = !!$.cookie('isLoggedIn');
     
     formData.append('c_picture', this.file as File);
     // @ts-ignore
-    formData.append('c_firstname', this.catechisteForm.get('c_firstname')?.value);
+    formData.append('c_firstname', this.register_form.get('c_firstname')?.value);
     // @ts-ignore
-    formData.append('c_lastname', this.catechisteForm.get('c_lastname')?.value);
+    formData.append('c_lastname', this.register_form.get('c_lastname')?.value);
     // @ts-ignore
-    formData.append('c_mobile', this.catechisteForm.get('c_mobile')?.value);
+    formData.append('c_mobile', this.register_form.get('c_mobile')?.value);
     // @ts-ignore
-    formData.append('c_email', this.catechisteForm.get('c_email')?.value);
+    formData.append('c_email', this.register_form.get('c_email')?.value);
     // @ts-ignore
-    formData.append('c_birth_date', this.catechisteForm.get('c_birth_date')?.value);
+    formData.append('c_birth_date', this.register_form.get('c_birth_date')?.value);
     // @ts-ignore
-    formData.append('c_address', this.catechisteForm.get('c_address')?.value);
+    formData.append('c_address', this.register_form.get('c_address')?.value);
     // @ts-ignore
-    formData.append('c_gender', this.catechisteForm.get('c_gender')?.value);
+    formData.append('c_gender', this.register_form.get('c_gender')?.value);
     // @ts-ignore
-    formData.append('c_seniority', this.catechisteForm.get('c_seniority')?.value);
+    formData.append('c_seniority', this.register_form.get('c_seniority')?.value);
     // @ts-ignore
-    formData.append('c_section', this.catechisteForm.get('c_section')?.value);
+    formData.append('c_section', this.register_form.get('c_section')?.value);
+    // Ajouter admin_name à formData
+    formData.append('admin_name', this.userInfo?.u_firstname + ' ' + this.userInfo?.u_lastname);
   
     this.catechiste.createCatechiste(formData).subscribe({
       next: (response: any) => {
@@ -167,10 +170,8 @@ is_user_logged_in = !!$.cookie('isLoggedIn');
       }
     });
   }
-  
 
   ngOnInit() {
-
+    // Initialisation du formulaire si nécessaire
   }
-
 }
