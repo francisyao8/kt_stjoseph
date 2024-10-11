@@ -128,47 +128,42 @@ ngAfterViewInit() {
   $('.dropify').dropify();
 
   $('.dropify').on('change', (event: any) => {
-    this.onDocChange(event); // Appel de votre fonction onDocChange pour gérer le fichier sélectionné
+    const inputId = event.target.id;
+    if (inputId === 'kt_picture') {
+      this.onFileChange(event);
+    } else if (inputId === 'birthCertificate') {
+      this.onDocChange(event);
+    }
   });
 
   // Vous pouvez accéder à fileInput en toute sécurité ici
   console.log('File input initialized:', this.fileInput);
 }
 
-  openFileInput() {
-    if (this.fileInput) {
-      this.fileInput.nativeElement.click(); // Ouvre la boîte de dialogue de sélection de fichier
-    } else {
-      console.error('fileInput is not available yet');
-    }
+openFileInput() {
+  if (this.fileInput) {
+    this.fileInput.nativeElement.click();
+  } else {
+    console.error('fileInput is not available yet');
   }
+}
 
-  
-  onPreviewImage(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewImageSrc = e.target.result;
-        this.selectedImage = true;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-      this.file = event.target.files[0];
-    }
-  }
-  
-  onFileChange(event: any) {
-    console.log(event);
-    let file = event.target.files[0];
-    this.file = file;
-    return file;
-  }
 
-  onDocChange(event: any) {
-    console.log(event);
-    let doc = event.target.files[0];
-    this.doc = doc;
-    return doc;
-  }
+
+onFileChange(event: any) {
+  console.log(event);
+  let file = event.target.files[0];
+  this.file = file;
+  return file;
+}
+
+onDocChange(event: any) {
+  console.log(event);
+  let doc = event.target.files[0];
+  this.doc = doc;
+  return doc;
+}
+
 
 
   SubmitForm() {

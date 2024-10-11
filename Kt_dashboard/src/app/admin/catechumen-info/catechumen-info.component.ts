@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatechumeneService } from 'src/app/services/catechumene.service';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -15,7 +15,7 @@ export class CatechumenInfoComponent implements OnInit, AfterViewInit {
   catechumene: any;
   kt_id: any;
 
-  constructor(private catechumenes: CatechumeneService, private _activateRouter: ActivatedRoute) {}
+  constructor(private catechumenes: CatechumeneService, private _activateRouter: ActivatedRoute, private router: Router) {}
 
 
   viewCatechumene() {
@@ -108,6 +108,10 @@ export class CatechumenInfoComponent implements OnInit, AfterViewInit {
       img.onerror = reject;
       img.src = url;
     });
+  }
+
+  edit(){
+    this.router.navigate(['/admin', 'edit-catechumene', this.catechumene.kt_uid])
   }
 
   downloadPage() {

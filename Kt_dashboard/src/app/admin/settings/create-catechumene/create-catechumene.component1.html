@@ -26,24 +26,14 @@
          
         <div *ngIf="currentStep === 1">
           <h3 class="body-card-title">Informations de base</h3>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <div class="form-outline" *ngIf="!selectedImage">
-                  <label class="picture" for="profilePhoto">
-                    Profile Photo <span class="text-danger">*</span>
-                    <input type="file" name="kt_picture" formControlName="kt_picture" id="profilePhoto" class="picture"
-                      accept="image/*" style="display: none;" (change)="onPreviewImage($event); onFileChange($event)"
-                      accept="png, jpg, jpeg">
-                  </label>
-                </div>
-                <!-- Dans votre template HTML -->
-                <div class="show_picture" *ngIf="selectedImage">
-                  <img id="preview" [src]="previewImageSrc" alt="Preview" style="display: block;"
-                    (click)="openFileInput()" #preview>
-                </div>
-                <input type="file" #fileInput style="display: none;" accept="image/*" (change)="onPreviewImage($event)">
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <div class="dropify-location" id="picture">
+                <input name="file2" type="file" name="kt_picture" formControlName="kt_picture"
+                  id="kt_picture" class="dropify" data-height="160" style="font-size: large !important;" />
               </div>
             </div>
+          </div>
             <div class="row mb-3">
               <div class="col-md-6">
                 <label for="firstname" class="form-label">Prénom <span class="text-danger">*</span></label>
