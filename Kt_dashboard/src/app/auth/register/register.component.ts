@@ -43,7 +43,7 @@ admin_role = [
 
 newUser() {
   this.isLoading = true;
-  return this.register.cretaUser(this.register_form.value).subscribe({
+  this.register.cretaUser (this.register_form.value).subscribe({
     next: (response: any) => {
       this.user = response.result;
       this._router.navigate(['/auth/login']);
@@ -54,16 +54,17 @@ newUser() {
       );
     },
     error: (error: any) => {
+      this.isLoading = false;
+      const errorMessage = error?.error_description || 'An unknown error occurred.';
       Swal.fire(
         'Error!',
-        error?.error_description || '',
+        errorMessage,
         'error'
       );
-      this.isLoading = false;
     },
     complete: () => {
-      console.log('complete');
-      this.isLoading = false;
+      console.log('Request completed');
+      // Ici, isLoading est déjà défini à false dans l'erreur
     }
   });
 }

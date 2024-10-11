@@ -18,45 +18,69 @@ export class AnimateursComponent implements OnInit {
 
   constructor(private catechiste: CatechisteService, private _router: Router) { }
 
+
   viewCatechiste() {
-    // $('.table').DataTable().destroy();
-    // this.all_catechiste = []
-    let body = {};
-    return this.catechiste.readAllCatechiste(body).subscribe({
-      next: (response: any) => {
-        if (response && response.status === 'success' && response.catechiste) {
-          this.all_catechiste = response.catechiste;
-          setTimeout(() => {
-            $('.table').DataTable({
-              layout: {
-                topStart: {
-                    buttons: [
-                        'copy', 'excel', 'pdf', 'print'
-                    ]
-                }
+    const userRole = this.userInfo?.u_role;
+
+    if (['super admin', 'coordinateur', 'secretaire'].includes(userRole)) {
+      this.catechiste.readAllCatechiste({}).subscribe({
+        next: (response: any) => {
+          this.handleCatechisteResponse(response);
+        },
+        error: this.handleError,
+      });
+    } else if (['responsable young', 'responsable child', 'responsable adult'].includes(userRole)) {
+      const body = { c_section: userRole.split(' ')[1].toLowerCase() }; 
+      this.catechiste.readCatechisteBysection(body).subscribe({
+        next: (response: any) => {
+          this.handleCatechisteResponse(response);
+        },
+        error: this.handleError,
+      });
+    } else {
+      console.warn('User role not recognized or does not have access to catechists');
+    }
+  }
+
+  handleCatechisteResponse(response: any) {
+    if (response && response.status === 'success' && response.catechiste) {
+      this.all_catechiste = response.catechiste;
+      setTimeout(() => {
+        $('.table').DataTable({
+          layout: {
+            topStart: {
+              buttons: ['copy', 'excel', 'pdf', 'print']
             }
-            });
-          }, 1000);
-        } else {
-          console.error('Error: Invalid response format or empty catechiste list');
-        }
-      },
-      error: (err) => {
-        console.error('Error during fetching catechists:', err);
-      },
-      complete: () => {
-        console.log('Request completed');
-      },
-    });
+          }
+        });
+      }, 1000);
+    } else {
+      console.error('Error: Invalid response format or empty catechiste list');
+    }
+  }
+
+  handleError(err: any) {
+    console.error('Error during fetching catechists:', err);
   }
 
   delCatechiste(uid: any, matricule: any) {
-    const userId = this.userInfo.user_id;  
+    const userId = this.userInfo?.u_uid;  
+    const name = this.userInfo?.u_firstname + ' ' + this.userInfo?.u_lastname;  
+  
+    if (!userId) {
+      console.error('User ID not found. Cannot delete catechiste.');
+      return;  
+    }
+  
     const body = {
       c_uid: uid,
       c_matricule: matricule,
-      user_id: userId
+      created_by: userId,
+      admin_name: name 
     }
+  
+    console.log('Payload:', body); 
+    
     Swal.fire({
       title: 'Are you sure?',
       text: 'You want to delete this catechiste?',
@@ -71,7 +95,7 @@ export class AnimateursComponent implements OnInit {
           next: (response: any) => {
             if (response && response.status === 'success') {
               Swal.fire('Deleted!', 'Catechiste has been deleted.', 'success');
-              this._router.navigate(['/admin/animateurs']);
+              this.viewCatechiste();
             } else {
               Swal.fire('Error!', 'Failed to delete catechiste.', 'error');
             }
@@ -87,7 +111,7 @@ export class AnimateursComponent implements OnInit {
       }
     });
   }
-
+  
   ngOnInit() {
     this.viewCatechiste();
   }

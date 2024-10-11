@@ -93,7 +93,7 @@ body {
     border-radius: 8px;
     object-fit: initial;
     position: relative;
-    top: 80px;
+    top: 166px;
     left: 60px;
 }
 
@@ -119,6 +119,16 @@ body {
     background-color: #001a3a; /* Couleur de fond au survol */
   }
 
+
+  .edit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #002556;
+    background-color: #ccc; /* Couleur de fond du bouton */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   
 
 /* Responsive Styles */

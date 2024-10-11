@@ -59,7 +59,8 @@
               "src/assets/css/dataTables.dataTables.css",
               "src/assets/css/buttons.dataTables.min.css",
               "src/assets/css/s.css",
-              "node_modules/pdfjs-dist/web/pdf_viewer.css"
+              "node_modules/pdfjs-dist/web/pdf_viewer.css",
+              "src/assets/vendors/dropify/dist/dropify.min.css"
             ],
             "scripts": [
               "src/assets/js/jquery-3.7.1.js",
@@ -75,7 +76,9 @@
               "src/assets/js/vfs_fonts.js",
               "src/assets/js/buttons.html5.min.js",
               "src/assets/js/buttons.print.min.js",
-              "src/assets/js/s.js"
+              "src/assets/js/s.js",
+              "src/assets/js/dropify.js",
+              "src/assets/vendors/dropify/dist/dropify.min.js"
             ]
           },
           "configurations": {

@@ -70,6 +70,55 @@
         </div>
     </section>
 
+    
+    <section class="body-section">
+        <h3>Informations Catéchèse</h3>
+
+        <div class="card">
+            <div class="body-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Informations du catéchumène -->
+                        <div *ngIf="catechumene?.kt_level" class="ref-info mt-2">
+                            <div class="info-label">Level:</div>
+                            <div class="info-value">{{ catechumene?.kt_level }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_section" class="ref-info mt-2">
+                            <div class="info-label">Section:</div>
+                            <div class="info-value">{{ catechumene?.kt_section }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_baptized_baby" class="ref-info mt-2">
+                            <div class="info-label">Baptisé bébé:</div>
+                            <div class="info-value">{{ catechumene?.kt_baptized_baby }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_baptism_date" class="ref-info mt-2">
+                            <div class="info-label">Date de Bapteme:</div>
+                            <div class="info-value">{{ catechumene?.kt_baptism_date| date: 'dd/MM/yyyy' }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_place_baptism" class="ref-info mt-2">
+                            <div class="info-label">Lieu de bapteme:</div>
+                            <div class="info-value">{{ catechumene?.kt_place_baptism }}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_confirm_date" class="ref-info mt-2">
+                            <div class="info-label">Date de Comfirmation:</div>
+                            <div class="info-value">{{ catechumene?.kt_confirm_date | date: 'dd/MM/yyyy'}}</div>
+                        </div>
+                        <div *ngIf="catechumene?.kt_place_confirm" class="ref-info mt-2">
+                            <div class="info-label">Lieu de Comfirmation:</div>
+                            <div class="info-value">{{ catechumene?.kt_place_confirm }}</div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-2">
+                        <div class="photo-location">
+                            <img src="./assets/images/logos/stjoseph_img2.png" alt="Photo de l'église"
+                                class="stj-image">
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Informations sur les parents -->
     <section *ngIf="catechumene?.kt_father_firstname || catechumene?.kt_mother_firstname">
         <h3>Informations sur les Parents</h3>

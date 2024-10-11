@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatechisteService } from 'src/app/services/catechiste.service';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -14,7 +14,8 @@ export class CatechistInfoComponent implements OnInit {
   c_id: any;
 
   constructor(private catechiste: CatechisteService,
-              private _activateRouter: ActivatedRoute) {}
+              private _activateRouter: ActivatedRoute,
+              private router: Router) {}
 
   viewCatechiste() {
     let body = {
@@ -52,7 +53,7 @@ export class CatechistInfoComponent implements OnInit {
         if (ctx) {
           ctx.drawImage(img, 0, 0);
           const base64Image = canvas.toDataURL('image/png');
-          console.log(base64Image); // Vérifiez le base64 dans la console
+          console.log(base64Image); 
           resolve(base64Image);
         } else {
           reject('Failed to get canvas context');
@@ -61,6 +62,10 @@ export class CatechistInfoComponent implements OnInit {
       img.onerror = reject;
       img.src = url;
     });
+  }
+
+  edit(){
+    this.router.navigate(['/admin', 'edit-catechiste', this.catechiste_info.c_uid])
   }
 
   downloadPage() {

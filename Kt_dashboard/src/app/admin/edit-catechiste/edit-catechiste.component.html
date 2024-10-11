@@ -28,14 +28,14 @@
                       </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="firstname" class="form-label ">Prénom <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control text-capitalize" name="c_firstname"
-                                formControlName="c_firstname" id="firstname" required>
+                            <label for="firstname" class="form-label text-capitalize">Prénom <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="c_firstname" formControlName="c_firstname"
+                                id="firstname" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="lastname" class="form-label ">Nom <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control text-capitalize" name="c_lastname"
-                                formControlName="c_lastname" id="lastname" required>
+                            <label for="lastname" class="form-label text-capitalize">Nom <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="c_lastname" formControlName="c_lastname"
+                                id="lastname" required>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -158,7 +158,7 @@
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-next rounded-pill" [disabled]="!register_form.valid">
-                            <span *ngIf="!isloading">S'inscrire</span>
+                            <span *ngIf="!isloading">Mettre a jour</span>
                             <span *ngIf="isloading" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                             <span *ngIf="isloading" class="visually-hidden" role="status">Loading...</span>
                         </button>

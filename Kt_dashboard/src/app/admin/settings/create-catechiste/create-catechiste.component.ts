@@ -48,7 +48,11 @@ export class CreateCatechisteComponent implements OnInit, AfterViewInit {
     c_seniority: new FormControl(null, Validators.required),
     c_section: new FormControl(null, Validators.required),
     created_by: new FormControl(this.userInfo?.u_uid, Validators.required),
-    admin_name: new FormControl(this.userInfo?.u_firstname + ' ' + this.userInfo?.u_lastname, Validators.required) 
+    admin_name: new FormControl(this.userInfo?.u_firstname + ' ' + this.userInfo?.u_lastname, Validators.required),
+    c_baptism_date : new FormControl(null, Validators.required),
+    c_place_baptism : new FormControl(null, Validators.required),
+    c_confirm_date : new FormControl(null, Validators.required),
+    c_place_confirm : new FormControl(null, Validators.required),
   });
 
   cat_section = [
@@ -76,31 +80,26 @@ export class CreateCatechisteComponent implements OnInit, AfterViewInit {
       dateFormat: 'Y-m-d',
       defaultDate: 'today'
     });
-    
-    // Vous pouvez accéder à fileInput en toute sécurité ici
+    $('.dropify').dropify();
+
+    $('.dropify').on('change', (event: any) => {
+      this.onFileChange(event);
+    });
+
+
     console.log('File input initialized:', this.fileInput);
   }
 
+
   openFileInput() {
     if (this.fileInput) {
-      this.fileInput.nativeElement.click();
+      this.fileInput.nativeElement.click(); 
     } else {
       console.error('fileInput is not available yet');
     }
   }
 
-  onPreviewImage(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewImageSrc = e.target.result;
-        this.selectedImage = true;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-      this.file = event.target.files[0];
-    }
-  }
-  
+
   onFileChange(event: any) {
     console.log(event);
     let file = event.target.files[0];
@@ -138,6 +137,14 @@ export class CreateCatechisteComponent implements OnInit, AfterViewInit {
     formData.append('c_seniority', this.register_form.get('c_seniority')?.value);
     // @ts-ignore
     formData.append('c_section', this.register_form.get('c_section')?.value);
+     // @ts-ignore
+    formData.append('c_baptism_date', this.register_form.get('c_baptism_date')?.value);
+      // @ts-ignore
+    formData.append('c_place_baptism', this.register_form.get('c_place_baptism')?.value);
+     // @ts-ignore
+    formData.append('c_confirm_date', this.register_form.get('c_confirm_date')?.value);
+      // @ts-ignore
+    formData.append('c_place_confirm', this.register_form.get('c_place_confirm')?.value);
     // Ajouter admin_name à formData
     formData.append('admin_name', this.userInfo?.u_firstname + ' ' + this.userInfo?.u_lastname);
   

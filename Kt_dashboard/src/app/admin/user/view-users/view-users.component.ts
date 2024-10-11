@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 
+declare var $: any;
 
 @Component({
   selector: 'app-view-users',
@@ -15,7 +16,9 @@ export class ViewUsersComponent implements OnInit{
   user_id: any;
   user_info: any;
   isLoading: any
-
+// @ts-ignore
+userInfo: any = JSON.parse(sessionStorage.getItem('infoLogin'));
+is_user_logged_in = !!$.cookie('isLoggedIn');
   constructor(
     private user: UsersService,
     private _activatedRoute: ActivatedRoute,
@@ -39,9 +42,21 @@ export class ViewUsersComponent implements OnInit{
   }
 
   delAdmin(uid: string, matricule: string) {
+    const userId = this.userInfo?.u_uid;
+    const name = this.userInfo?.u_firstname + ' ' + this.userInfo?.u_lastname;
+    const userRole = this.userInfo?.u_role;
+  
+    // Vérifiez si le rôle de l'utilisateur est autorisé à supprimer un admin
+    if (userRole !== 'super admin' && userRole !== 'coordinateur' && userRole !== 'secretaire') {
+      Swal.fire('Permission Denied', 'You do not have permission to delete users.', 'error');
+      return;
+    }
+  
     const body = {
       u_uid: uid,
       u_matricule: matricule,
+      created_by: userId,
+      admin_name: name
     };
   
     Swal.fire({

@@ -21,7 +21,6 @@ body {
    
 }
 
-
 .logo {
     width: 80px; /* Diminuer la taille du logo */
 }
@@ -39,7 +38,7 @@ body {
     text-align: center;
     margin: 20px 0;
     position: relative;
-
+    top: 10px;
     background-color: #cccccc91;
     border-radius: 15px;
     padding: 15px;
@@ -61,6 +60,28 @@ body {
     top: 50px;
 }
 
+.progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #002556;
+    margin: 0 10px;
+}
+
+.progress-step-active {
+    background-color: #002556;
+    color: #ffffff;
+}
+
+.body-section {
+    position: relative;
+    bottom: 60px;
+}
 
 
 /* Card Styles */
@@ -71,7 +92,7 @@ body {
     padding: 20px;
     background-color: #ffffff;
     position: relative;
-    top: 55px;
+    top: 74px;
 }
 
 .body-card-title {
@@ -81,54 +102,72 @@ body {
     font-weight: bold; /* Rendre le texte en gras */
 }
 
+/* Form Styles */
+.form-label {
+    color: #002556;
+    font-weight: bold; /* Rendre le texte en gras */
+}
 
-.img-fluid {
+.form-control {
+
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    border-color: #002556;
+    box-shadow: 0 0 0 0.2rem rgba(0, 37, 86, 0.25);
+}
+
+.btn-next {
+    background-color: #002556;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-next:hover {
+    background-color: #003c8f;
+}
+
+/* Picture Styles */
+.picture-input {
+    display: none;
+}
+
+.picture {
+    display: inline-block;
     height: 150px;
     width: 150px;
-    position: relative;
-    top: 40px;
-    margin-left: 140px;
-    
-}
-
-.ref-info {
-    display: flex;
-    justify-content: space-between; /* Aligne les éléments enfants aux extrémités */
-    padding: 5px 0;
-}
-
-.info-label {
-
-    margin-right: 10px; /* Espacement entre le label et la valeur */
-}
-
-.info-value {
-    text-align: end; /* Aligne le texte à droite */
-    font-weight: bold;
-}
-
-.body-section {
-    position: relative;
-    bottom: 60px;
-}
-
-
-#qr-code {
-    position: relative;
-    top: 50px;
-    display: flex;
-    justify-content: center;
+    border-radius: 6px;
+    border: 2px dashed #002556;
     text-align: center;
-    align-items: center;
-    margin: auto;
-    width: 140px;
-    height: 140px;
+    line-height: 150px;
+    cursor: pointer;
+    color: #002556;
 }
 
+.picture:hover {
+    color: #003c8f;
+    border: 2px dashed #003c8f;
+}
 
+#preview {
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+    border-radius: 6px;
+    border: 2px dashed #002556;
+    text-align: center;
+    line-height: 150px;
+    cursor: pointer;
+}
 
-
-
+#preview:hover {
+    border: 2px dashed #003c8f;
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -144,30 +183,23 @@ body {
         font-size: 20px; /* Réduit la taille du titre pour les écrans plus petits */
     }
 
- 
+    .progress-step {
+        width: 40px; 
+        height: 40px;
+        font-size: 18px; 
+        position: relative;
+        top: 22px;
+    }
 
     .body-card-title {
         font-size: 25px; /* Réduit la taille du titre pour les écrans plus petits */
     }
 
-    .img-fluid {
-        height: 150px;
-        width: 150px;
-        position: relative;
-        right: 72%;
-        top: 10%;
+    .picture, #preview {
+        height: 150px; /* Réduit la hauteur de l'image pour les petits écrans */
+        width: 150px; /* Réduit la largeur de l'image pour les petits écrans */
+       
     }
-
-    .body-section {
-        position: relative;
-        bottom: 60px;
-    }
-
-    .qr-location {
-        margin: auto;
-        width: 50%;
-    }
-  
 }
 
 @media (max-width: 576px) {
@@ -193,20 +225,11 @@ body {
         font-size: 25px; /* Réduit la taille du titre pour les très petits écrans */
     }
 
-    .img-fluid {
+    .picture, #preview {
         height: 150px;
         width: 150px;
-        position: relative;
-        right: 72%;
-        top: 10%;
-        
-    }
-    .qr-location {
-        margin: auto;
-        width: 50%;
     }
 }
- 
 
 @media (max-width: 375px) {
     .container {
@@ -231,16 +254,8 @@ body {
         font-size: 25px; /* Réduit la taille du titre pour les très petits écrans */
     }
 
-    .img-fluid {
+    .picture, #preview {
         height: 150px;
         width: 150px;
-        position: relative;
-        right: 72%;
-        top: 10%;
-        
-    }
-    .qr-location {
-        margin: auto;
-        width: 50%;
     }
 }

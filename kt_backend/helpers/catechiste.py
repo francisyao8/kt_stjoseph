@@ -64,6 +64,10 @@ def createCatechiste():
         c_birth_date_str = request.form.get('c_birth_date')
         c_birth_date = datetime.strptime(c_birth_date_str, '%Y-%m-%d') if c_birth_date_str else None
         c_address = request.form.get('c_address')
+        c_baptism_date = request.form.get('c_baptism_date')
+        c_place_baptism = request.form.get('c_place_baptism')
+        c_confirm_date = request.form.get('c_confirm_date')
+        c_place_confirm = request.form.get('c_place_confirm')
 
         created_by = request.form.get('created_by')
         print("Created By:", created_by)
@@ -84,6 +88,10 @@ def createCatechiste():
         new_catechiste.c_section = c_section
         new_catechiste.c_birth_date = c_birth_date
         new_catechiste.c_address = c_address
+        new_catechiste.c_baptism_date = c_baptism_date
+        new_catechiste.c_place_baptism = c_place_baptism
+        new_catechiste.c_confirm_date = c_confirm_date
+        new_catechiste.c_place_confirm = c_place_confirm
         new_catechiste.created_by = created_by
         new_catechiste.admin_name = admin_name
 
@@ -91,7 +99,7 @@ def createCatechiste():
             db.session.add(new_catechiste)
             db.session.commit()
 
-            create_log(created_by,admin_name,"creation","Catechiste",new_catechiste.c_uid,new_catechiste.c_matricule,f'{new_catechiste.c_firstname} {new_catechiste.c_lastname}')
+            create_log(created_by,admin_name,"create","Catechiste",new_catechiste.c_uid,new_catechiste.c_matricule,f'{new_catechiste.c_firstname} {new_catechiste.c_lastname}', "creating the catechist")
             print("Log added successfully") 
 
             response['status'] = 'success'
@@ -134,6 +142,10 @@ def readAllCatechiste():
                 'c_gender' : catechiste.c_gender,
                 'c_seniority' : catechiste.c_seniority,
                 'c_section' : catechiste.c_section,
+                'c_baptism_date': catechiste.c_baptism_date,
+                'c_place_baptism': catechiste.c_place_baptism,
+                'c_confirm_date': catechiste.c_confirm_date,
+                'c_place_confirm': catechiste.c_place_confirm,
                 'c_birth_date': str(catechiste.c_birth_date),
                 'c_address' : catechiste.c_address,
                 'c_creation_date': str(catechiste.c_creation_date),
@@ -187,6 +199,10 @@ def readSingleCatechiste():
                 'c_gender': catechiste.c_gender,
                 'c_seniority': catechiste.c_seniority,
                 'c_section': catechiste.c_section,
+                'c_baptism_date': catechiste.c_baptism_date,
+                'c_place_baptism': catechiste.c_place_baptism,
+                'c_confirm_date': catechiste.c_confirm_date,
+                'c_place_confirm': catechiste.c_place_confirm,
                 'c_birth_date': str(catechiste.c_birth_date),
                 'c_address': catechiste.c_address,
                 'c_creation_date': str(catechiste.c_creation_date),
@@ -234,6 +250,14 @@ def updateCatechiste():
     c_birth_date_str = request.form.get('c_birth_date')
     c_birth_date = datetime.strptime(c_birth_date_str, '%Y-%m-%d') if c_birth_date_str else None
     c_address = request.form.get('c_address')
+    c_baptism_date = request.form.get('c_baptism_date')
+    c_place_baptism = request.form.get('c_place_baptism')
+    c_confirm_date = request.form.get('c_confirm_date')
+    c_place_confirm = request.form.get('c_place_confirm')
+    created_by = request.form.get('created_by')
+    print("Created By:", created_by)
+    admin_name = request.form.get('admin_name')
+    print("Created By:", admin_name)
 
     # Assurez-vous de rechercher le catéchiste par son c_uid uniquement, car c_matricule peut être modifié
     up_catechiste = kt_catechiste.query.filter_by(c_uid=c_uid).first()
@@ -254,27 +278,18 @@ def updateCatechiste():
         up_catechiste.c_section = c_section
         up_catechiste.c_birth_date = c_birth_date
         up_catechiste.c_address = c_address
+        up_catechiste.c_baptism_date = c_baptism_date
+        up_catechiste.c_place_baptism = c_place_baptism
+        up_catechiste.c_confirm_date = c_confirm_date
+        up_catechiste.c_place_confirm = c_place_confirm
+        up_catechiste.created_by = created_by
+        up_catechiste.admin_name = admin_name
 
         try:
             db.session.commit()
 
-            # Ajouter l'enregistrement dans les logs si c'est un admin
-            if 'user_id' in request.form:
-                user_id = request.form.get('user_id')
-                admin_user = kt_users.query.filter_by(u_uid=user_id).first()
-                if admin_user:
-                    new_log = Log(
-                        user_id=admin_user.u_uid,
-                        user_name= admin_user.u_username,
-                        action='Update Catechiste',
-                        target_type='Catechiste',
-                        target_id=up_catechiste.c_uid,
-                        target_matricule=up_catechiste.c_matricule,
-                        target_fullname=f"{up_catechiste.c_firstname} {up_catechiste.c_lastname}",
-                        details='Catechiste updated by admin'
-                    )
-                    db.session.add(new_log)
-                    db.session.commit()
+            create_log(created_by,admin_name,"update","Catechiste",up_catechiste.c_uid,up_catechiste.c_matricule,f'{up_catechiste.c_firstname} {up_catechiste.c_lastname}', "catechist update ")
+            print("Log added successfully") 
 
             response['status'] = 'success'
             response['message'] = 'Catechiste updated successfully'
@@ -298,50 +313,64 @@ def updateCatechiste():
 def deleteCatechiste():
     response = {}
     data = request.json
+    print("Request Payload:", data)  # Vérifiez ici si `created_by` est bien présent dans la requête
+
     c_uid = data.get('c_uid')
     c_matricule = data.get('c_matricule')
+    created_by = data.get('created_by') 
+    admin_name = data.get('admin_name')  
+    
+    print("Created By:", created_by)
+    print("Admin Name:", admin_name)
 
+    # Vérification des champs obligatoires
     if c_uid and c_matricule:
+        # Rechercher le catéchiste à supprimer
         del_catechiste = kt_catechiste.query.filter_by(c_uid=c_uid, c_matricule=c_matricule).first()
 
         if del_catechiste:
             try:
-                if 'user_id' in data:
-                    user_id = data.get('user_id')
-                    admin_user = kt_users.query.filter_by(u_uid=user_id).first()
-
-                    if admin_user:
-                        print(f"Admin user found: {admin_user.u_username}")
-                        
-                        # Créer le log
-                        create_log(user_id, admin_user.u_username, "delete", "Catechiste", del_catechiste.c_uid, del_catechiste.c_matricule, f'{del_catechiste.c_firstname} {del_catechiste.c_lastname}')
-                        print("Log added successfully")
-                    else:
-                        print("Admin user not found")
-                        response['status'] = 'error'
-                        response['message'] = 'Admin user not found'
-
                 # Supprimer le catéchiste
+                del_catechiste.is_deleted = True
                 db.session.delete(del_catechiste)
                 db.session.commit()
 
+                # Créer le log de suppression
+                if created_by and admin_name:
+                    create_log(
+                        created_by, 
+                        admin_name,  
+                        "delete", 
+                        "Catechiste", 
+                        del_catechiste.c_uid, 
+                        del_catechiste.c_matricule, 
+                        f'{del_catechiste.c_firstname} {del_catechiste.c_lastname}',
+                        "deletion of the catechist "
+                    )
+                    print("Log added successfully")
+                else:
+                    print("Admin user or created_by not found for logging")
+
+                # Réponse de succès
                 response['status'] = 'success'
                 response['message'] = 'Catechiste deleted successfully'
 
             except Exception as e:
                 db.session.rollback()  # Annuler en cas d'erreur
-                print("Error deleting catechiste:", e)  
+                print("Error deleting catechiste:", e)
                 response['status'] = 'error'
                 response['message'] = 'Failed to delete catechiste'
                 response['error_description'] = str(e)
-
         else:
+            # Catéchiste introuvable
             response['status'] = 'error'
             response['message'] = 'Catechiste not found'
     else:
+        # Données manquantes
         response['status'] = 'error'
         response['message'] = 'c_uid and c_matricule are required'
 
+    # Retourner la réponse JSON
     return jsonify(response)
 
 
@@ -357,16 +386,25 @@ def readCatechisteBysection():
 
         # Formatter les informations pour la réponse
         catchiste_list = []
-        for catchiste in catchiste_info:
+        for catechiste in catchiste_info:
             catchiste_data = {
                 
-                'c_matricule': catchiste.c_matricule,
-                'c_firstname': catchiste.c_firstname,
-                'c_lastname': catchiste.c_lastname,
-                'c_mobile': catchiste.c_mobile,
-                'c_gender': catchiste.c_gender,
-                'c_seniority': catchiste.c_seniority,
-                'c_section': catchiste.c_section,
+                'c_uid' : catechiste.c_uid,
+                'c_matricule' : catechiste.c_matricule,
+                'c_picture': str(IMGHOSTNAME)+str(catechiste.c_picture),
+                'c_firstname' : catechiste.c_firstname,
+                'c_lastname' : catechiste.c_lastname,
+                'c_mobile' : catechiste.c_mobile,
+                'c_email' : catechiste.c_email,
+                'c_gender' : catechiste.c_gender,
+                'c_seniority' : catechiste.c_seniority,
+                'c_section' : catechiste.c_section,
+                'c_birth_date': str(catechiste.c_birth_date),
+                'c_address' : catechiste.c_address,
+                'c_creation_date': str(catechiste.c_creation_date),
+                'c_ref_creation': catechiste.c_ref_creation,
+                'c_creation_number': catechiste.c_creation_number,
+                'created_by': catechiste.created_by,
             }
             catchiste_list.append(catchiste_data)
 
@@ -374,7 +412,7 @@ def readCatechisteBysection():
         response = {
             'status': 'success',
             'message': 'Informations sur les catéchumènes récupérées avec succès',
-            'catchiste_info': catchiste_list
+            'catechiste': catchiste_list
         }
         response['total_catchiste'] = f"{total_catchiste} catchiste{'s' if total_catchiste != 1 else ''}"
 
@@ -389,3 +427,39 @@ def readCatechisteBysection():
 
     return response
 
+def readTrashedCatechiste():
+    response = {}
+    try:
+        trashed_catechise = kt_catechiste.query.filter_by(is_deleted=True).all()
+        catechiste_list = []
+
+        for catechiste in trashed_catechise:
+            catchiste_data = {
+                'c_uid': catechiste.c_uid,
+                'c_matricule': catechiste.c_matricule,
+                'c_picture': str(IMGHOSTNAME)+str(catechiste.c_picture),
+                'c_firstname': catechiste.c_firstname,
+                'c_lastname': catechiste.c_lastname,
+                'c_mobile': catechiste.c_mobile,
+                'c_email': catechiste.c_email,
+                'c_gender': catechiste.c_gender,
+                'c_seniority': catechiste.c_seniority,
+                'c_section': catechiste.c_section,
+                'c_birth_date': str(catechiste.c_birth_date),
+                'c_address': catechiste.c_address,
+                'c_creation_date': str(catechiste.c_creation_date),
+                'c_ref_creation': catechiste.c_ref_creation,
+                'c_creation_number': catechiste.c_creation_number,
+                'created_by': catechiste.created_by,
+            }
+            catechiste_list.append(catchiste_data)
+
+        response['status'] = 'success'
+        response['message'] = 'Trashed catechiste retrieved successfully'
+        response['users'] = catechiste_list
+
+    except Exception as e:
+        response['error_description'] = str(e)
+        response['status'] = 'error'
+
+    return response

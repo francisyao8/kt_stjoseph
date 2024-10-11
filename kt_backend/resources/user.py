@@ -14,8 +14,11 @@ class UserApi(Resource):
         if route == 'ReadAllUsers':
             return readAllUser()  
         # Méthode get pour lire un  utilisateur
-        elif route == 'ReadSingleUser':
+        if route == 'ReadSingleUser':
             return readSingleUser()
+        
+        if route == 'ReadTrashedUsers':
+            return readTrashedUsers()
 
     def post(self, route):
         # Méthode POST pour créer un nouvel utilisateur

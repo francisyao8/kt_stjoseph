@@ -22,6 +22,7 @@ class kt_users(db.Model):
     u_email = db.Column(db.String(128), unique=True, nullable=False, default= 'bad_email')
     u_password = db.Column(db.String(128), nullable=False, default= 'bad_user')
     u_role = db.Column(db.String(128), nullable= False, default='bad_role')
+    is_deleted = db.Column(db.Boolean, default=False)  # Champ pour la corbeille
     u_last_login = db.Column(db.DateTime, nullable=True, default= datetime.datetime.utcnow)
     u_creation_date = db.Column(db.DateTime, nullable=False, default= datetime.datetime.utcnow)
     u_updated_date= db.Column(db.DateTime, nullable=False, default= datetime.datetime.utcnow)
@@ -49,6 +50,12 @@ class kt_catechiste(db.Model):
     c_updated_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     c_ref_creation = db.Column(db.String(128), unique=True, default=lambda: f"C{str(uuid.uuid4())[:8]}")
     c_creation_number = db.Column(db.Integer,autoincrement=True , nullable=False, default=0)
+    is_deleted = db.Column(db.Boolean, default=False)  # Champ pour la corbeille
+    c_baptism_date = db.Column(db.Date, nullable=True)
+    c_place_baptism = db.Column(db.String(100), nullable=False, default='bad_place')
+    c_confirm_date = db.Column(db.Date, nullable=True)
+    c_place_confirm = db.Column(db.String(100), nullable=False, default='bad_place')
+
 
     created_by = db.Column(db.String(128), db.ForeignKey('kt_users.u_uid'))
    
@@ -88,6 +95,10 @@ class kt_catechumene(db.Model):
     kt_level = db.Column(db.String(15), nullable=False, default='bad_level')
     kt_section = db.Column(db.String(15), nullable=False, default='bad_section')
     kt_baptized_baby = db.Column(db.String(10), nullable=False, default='bad_choose')
+    kt_baptism_date = db.Column(db.String(100), nullable=False, default='bad_date')
+    kt_place_baptism = db.Column(db.String(100), nullable=False, default='bad_place')
+    kt_confirm_date = db.Column(db.String(100), nullable=False, default='bad_date')
+    kt_place_confirm = db.Column(db.String(100), nullable=False, default='bad_place')
     
     # Informations sur le père
     kt_father_firstname = db.Column(db.String(50), nullable=False, default='bad_father_info')
@@ -139,6 +150,8 @@ class kt_catechumene(db.Model):
     kt_ref_creation = db.Column(db.String(128), unique=True, default=lambda: f"KT{str(uuid.uuid4())[:8]}")
     
     created_by = db.Column(db.String(128), db.ForeignKey('kt_users.u_uid'))
+    is_deleted = db.Column(db.Boolean, default=False)  # Champ pour la corbeille
+
     
 
     def __init__(self, *args, **kwargs):
@@ -163,9 +176,10 @@ class Log(db.Model):
     admin_name = db.Column(db.String(128), nullable=False)
     action = db.Column(db.String(50), nullable=False)
     target_type = db.Column(db.String(50), nullable=False)
-    target_id = db.Column(db.String(128), nullable=False)  # Change here
+    target_id = db.Column(db.String(128), nullable=False)  
     target_matricule = db.Column(db.String(20), nullable=False)
     target_fullname = db.Column(db.String(128), nullable=False)
+    details = db.Column(db.String(128), nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
     def as_dict(self):

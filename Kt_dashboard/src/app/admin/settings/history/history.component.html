@@ -1,91 +1,82 @@
 <div class="container">
-    <div class="page-title mt-4">
-        <h2>History</h2>
+  <div class="page-title mt-4">
+    <h2>History</h2>
+  </div>
+  <hr>
+
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active text-capitalize" id="nav-registration-tab" data-bs-toggle="tab" data-bs-target="#nav-registration" type="button" role="tab" aria-controls="nav-registration" aria-selected="true">Registration</button>
+      <button class="nav-link text-capitalize" id="nav-update-tab" data-bs-toggle="tab" data-bs-target="#nav-update" type="button" role="tab" aria-controls="nav-update" aria-selected="false">Update</button>
+      <button class="nav-link text-capitalize" id="nav-delete-tab" data-bs-toggle="tab" data-bs-target="#nav-delete" type="button" role="tab" aria-controls="nav-delete" aria-selected="false">Delete</button>
     </div>
-    <hr>
+  </nav>
 
-
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active text-capitalize" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">registration</button>
-        <button class="nav-link text-capitalize" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">update</button>
-        <button class="nav-link text-capitalize" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">delete</button>
-      </div>
-    </nav>
-    
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-         <div class="row">
-        <div class="history-list">
-
-            <!-- history list item -->
-            <div class="history-list-item history-list-item--unread">
-              <div class="history-list-actions">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input">
-                </div>
-                <a class="favorite" href="javascript:;"><span><i data-feather="star"></i></span></a>
+  <div class="tab-content" id="nav-tabContent">
+    <!-- Registration Tab -->
+    <div class="tab-pane fade show active" id="nav-registration" role="tabpanel" aria-labelledby="nav-registration-tab">
+      <div class="row">
+        <div class="col-12">
+          <div class="history-list">
+            <div *ngFor="let log of registrationLogs" class="history-list-item d-flex justify-content-between align-items-center">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="registration-{{ log.id }}">
+                <label class="form-check-label" for="registration-{{ log.id }}"></label>
               </div>
-              <a href="./read.html" class="history-list-detail">
-                <div class="content">
-                  <span class="from">Cedric Kelly</span>
-                </div>
-                <span class="date">
-                  08 Jan
-                </span>
-              </a>
-            </div>
-        </div>
-    </div>
-      </div>
-      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-         <div class="row">
-        <div class="history-list">
-
-            <!-- history list item -->
-            <div class="history-list-item history-list-item--unread">
-              <div class="history-list-actions">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input">
-                </div>
-                <a class="favorite" href="javascript:;"><span><i data-feather="star"></i></span></a>
+              <div class="content flex-grow-1 mx-3">
+                <span class="from fw-bold">{{ log.target_fullname }}</span>
+                <p class="mb-0">{{ log.details }}</p>
+                <small class="text-muted">Created by: {{ log.admin_name }}</small>
               </div>
-              <a href="./read.html" class="history-list-detail">
-                <div class="content">
-                  <span class="from">Cedric Kelly</span>
-                </div>
-                <span class="date">
-                  08 Jan
-                </span>
-              </a>
+              <span class="date text-muted">{{ log.timestamp | date:'short' }}</span>
             </div>
+          </div>
         </div>
-    </div>
       </div>
-      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-         <div class="row">
-        <div class="history-list">
+    </div>
 
-            <!-- history list item -->
-            <div class="history-list-item history-list-item--unread">
-              <div class="history-list-actions">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input">
-                </div>
-                <a class="favorite" href="javascript:;"><span><i data-feather="star"></i></span></a>
+    <!-- Update Tab -->
+    <div class="tab-pane fade" id="nav-update" role="tabpanel" aria-labelledby="nav-update-tab">
+      <div class="row">
+        <div class="col-12">
+          <div class="history-list">
+            <div *ngFor="let log of updateLogs" class="history-list-item d-flex justify-content-between align-items-center">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="update-{{ log.id }}">
+                <label class="form-check-label" for="update-{{ log.id }}"></label>
               </div>
-              <a href="./read.html" class="history-list-detail">
-                <div class="content">
-                  <span class="from">Cedric Kelly</span>
-                </div>
-                <span class="date">
-                  08 Jan
-                </span>
-              </a>
+              <div class="content flex-grow-1 mx-3">
+                <span class="from fw-bold">{{ log.target_fullname }}</span>
+                <p class="mb-0">{{ log.details }}</p>
+                <small class="text-muted">Updated by: {{ log.admin_name }}</small>
+              </div>
+              <span class="date text-muted">{{ log.timestamp | date:'short' }}</span>
             </div>
+          </div>
         </div>
-    </div>
       </div>
     </div>
 
+    <!-- Delete Tab -->
+    <div class="tab-pane fade" id="nav-delete" role="tabpanel" aria-labelledby="nav-delete-tab">
+      <div class="row">
+        <div class="col-12">
+          <div class="history-list">
+            <div *ngFor="let log of deleteLogs" class="history-list-item d-flex justify-content-between align-items-center">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="delete-{{ log.id }}">
+                <label class="form-check-label" for="delete-{{ log.id }}"></label>
+              </div>
+              <div class="content flex-grow-1 mx-3">
+                <span class="from fw-bold">{{ log.target_fullname }}</span>
+                <p class="mb-0">{{ log.details }}</p>
+                <small class="text-muted">Deleted by: {{ log.admin_name }}</small>
+              </div>
+              <span class="date text-muted">{{ log.timestamp | date:'short' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

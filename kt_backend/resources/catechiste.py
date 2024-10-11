@@ -19,8 +19,10 @@ class CatechisteApi(Resource):
         elif route == 'ReadSingleCatechiste':
             return readSingleCatechiste()
         
-        if route == 'ReadCatechisteBysection':
-            return readCatechisteBysection()
+        
+        
+        if route == 'ReadTrashedCatechiste':
+            return readTrashedCatechiste()
 
     def post(self, route):
         # Méthode POST pour créer un nouvel catetchiste
@@ -30,8 +32,11 @@ class CatechisteApi(Resource):
         if route == 'ReadSingleCatechiste': 
             return readSingleCatechiste()
 
-        if route == 'ReadAllCatchiste': 
-            return readAllCatechiste()
+        if route == 'ReadCatechisteBysection':
+            return readCatechisteBysection()
+        
+        if route == 'ReadAllCatchiste':
+            return readAllCatechiste() 
 
 
     def patch(self, route):

@@ -12,11 +12,18 @@ export class MenuGaucheComponent implements OnInit{
   user_id: any;
   user_info: any;
 
+  //@ts-ignore
+  userInfo:any = JSON.parse(sessionStorage.getItem('infoLogin'))
+  is_user_logged_in = !!$.cookie('isLoggedIn');
 
   constructor(
     private users: UsersService
   ) {}
 
+    // Méthode pour vérifier si l'utilisateur a accès
+    isUserAllowed(allowedRoles: string[]): boolean {
+      return allowedRoles.includes(this.userInfo.u_role);
+    }
 
   viewSingleUser() {
     let body = {
@@ -32,6 +39,9 @@ export class MenuGaucheComponent implements OnInit{
       complete: () => console.log('complete')
     })
   }
+
+
+
 
   ngOnInit(): void {
     this.viewSingleUser();

@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 
 
 
-def create_log(created_by, admin_name, action, target_type, target_id, target_matricule, target_fullname):
+def create_log(created_by, admin_name, action, target_type, target_id, target_matricule, target_fullname, details):
     try:
         new_log = Log(
             created_by=created_by,
@@ -22,6 +22,7 @@ def create_log(created_by, admin_name, action, target_type, target_id, target_ma
             target_id=target_id,
             target_matricule=target_matricule,
             target_fullname=target_fullname,
+            details=details
         )
 
         db.session.add(new_log)
@@ -35,21 +36,38 @@ def create_log(created_by, admin_name, action, target_type, target_id, target_ma
 
 
 def get_logs():
+    response = {}
     try:
-        # Optionnel : Filtrer par user_id ou action
-        user_id = request.args.get('user_id')
-        action = request.args.get('action')
+        rs = []
 
-        # Récupérer les logs
-        query = Log.query
-        
-        if user_id:
-            query = query.filter_by(user_id=user_id)
-        if action:
-            query = query.filter_by(action=action)
-        
-        logs = query.all()
-        return jsonify([log.as_dict() for log in logs]), 200
-    
+        all_logs = Log.query.all()
+
+        for log in all_logs:
+            log_data = {
+                'log_uid': log.log_uid,
+                'created_by': log.created_by,
+                'admin_name': log.admin_name,
+                'action': log.action,
+                'target_type': log.target_type,
+                'target_id': log.target_id,
+                'target_matricule': log.target_matricule,
+                'target_fullname': log.target_fullname,
+                'details': log.details,
+                'timestamp': log.timestamp
+            }
+            rs.append(log_data)
+
+        # Construire la réponse finale
+        response['response'] = 'success'
+        response['result'] = rs
+
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        response['response'] = 'error'
+        response['error'] = 'Unavailable'
+        response['error_code'] = 'LOGS01'
+        response['error_description'] = str(e)
+        c = BadRequest(str(e))
+        c.data = response
+        raise c
+
+    return jsonify(response)

@@ -19,7 +19,7 @@
         <div class="card">
             <div class="body-card">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <!-- Informations du catéchiste -->
                         <div class="ref-info mt-2">
                             <div class="info-label">Matricule:</div>
@@ -40,6 +40,22 @@
                         <div class="ref-info mt-2">
                             <div class="info-label">Section:</div>
                             <div class="info-value">{{ catechiste_info?.c_section }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Date of baptism:</div>
+                            <div class="info-value">{{ catechiste_info?.c_baptism_date }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Place of baptism:</div>
+                            <div class="info-value">{{ catechiste_info?.c_place_baptism }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Confirmation date:</div>
+                            <div class="info-value">{{ catechiste_info?.c_confirm_date }}</div>
+                        </div>
+                        <div class="ref-info mt-2">
+                            <div class="info-label">Place of confirmation:</div>
+                            <div class="info-value">{{ catechiste_info?.c_place_confirm }}</div>
                         </div>
                         <div class="ref-info mt-2">
                             <div class="info-label">Mobile:</div>
@@ -74,6 +90,7 @@
     </section>
 
     <div class="download-button-container">
-        <button (click)="downloadPage()" class="download-button">Télécharger la fiche</button>
+        <button (click)="downloadPage()" class="download-button me-2">Télécharger la fiche</button>
+        <button (click)="edit()" class="btn edit-button">Edite catechiste</button>
     </div>
 </div>

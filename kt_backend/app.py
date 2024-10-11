@@ -11,6 +11,7 @@ from model.kt_stjoseph import *
 from resources.catechumene import CatechumeneApi
 from resources.user import UserApi
 from resources.auth import AuthApi
+from resources.admin_log import LogApi
 from resources.catechiste import CatechisteApi
 from config.constant import *
 from flask_migrate import Migrate
@@ -67,6 +68,9 @@ api.add_resource(CatechisteApi, '/api/catechiste/<string:route>', endpoint='cate
 # catechumene api
 api.add_resource(CatechumeneApi, '/api/catechumene/<string:route>', endpoint='catechumene_all', methods=["GET","POST"])
 api.add_resource(CatechumeneApi, '/api/catechumene/<string:route>', endpoint='catechumene_all_patch', methods=["PATCH","DELETE"])
+
+# log api
+api.add_resource(LogApi, '/api/log/<string:route>', endpoint='log_all', methods=["GET"])
 
 
 

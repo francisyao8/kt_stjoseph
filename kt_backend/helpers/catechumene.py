@@ -229,6 +229,10 @@ def readAllCatechumene():
                 'kt_address': catechumene.kt_address,
                 'kt_section': catechumene.kt_section,
                 'kt_baptized_baby': catechumene.kt_baptized_baby,
+                'kt_baptism_date': catechumene.kt_baptism_date,
+                'kt_place_baptism': catechumene.kt_place_baptism,
+                'kt_confirm_date': catechumene.kt_confirm_date,
+                'kt_place_confirm': catechumene.kt_place_confirm,
                 'kt_father_firstname': catechumene.kt_father_firstname,
                 'kt_father_lastname': catechumene.kt_father_lastname,
                 'kt_father_nationality': catechumene.kt_father_nationality,
@@ -314,6 +318,10 @@ def readSingleCatechumene():
                 'kt_address': catechumene.kt_address,
                 'kt_section': catechumene.kt_section,
                 'kt_baptized_baby': catechumene.kt_baptized_baby,
+                'kt_baptism_date': catechumene.kt_baptism_date,
+                'kt_place_baptism': catechumene.kt_place_baptism,
+                'kt_confirm_date': catechumene.kt_confirm_date,
+                'kt_place_confirm': catechumene.kt_place_confirm,
                 'kt_father_firstname': catechumene.kt_father_firstname,
                 'kt_father_lastname': catechumene.kt_father_lastname,
                 'kt_father_nationality': catechumene.kt_father_nationality,
@@ -394,6 +402,10 @@ def updateCatechumene():
     kt_section = request.form.get('kt_section')
     kt_level = request.form.get('kt_level')
     kt_baptized_baby = request.form.get('kt_baptized_baby')
+    kt_baptism_date = request.form.get('kt_baptism_date')
+    kt_place_baptism = request.form.get('kt_place_baptism')
+    kt_confirm_date = request.form.get('kt_confirm_date')
+    kt_place_confirm = request.form.get('kt_place_confirm')
     kt_father_firstname = request.form.get('kt_father_firstname')
     kt_father_lastname = request.form.get('kt_father_lastname')
     kt_father_nationality = request.form.get('kt_father_nationality')
@@ -456,6 +468,10 @@ def updateCatechumene():
         up_catechumene.kt_section = kt_section
         up_catechumene.kt_level = kt_level
         up_catechumene.kt_baptized_baby = kt_baptized_baby
+        up_catechumene.kt_baptism_date = kt_baptism_date,
+        up_catechumene.kt_place_baptism = kt_place_baptism,
+        up_catechumene.kt_confirm_date = kt_confirm_date,
+        up_catechumene.kt_place_confirm = kt_place_confirm
         up_catechumene.kt_father_firstname = kt_father_firstname
         up_catechumene.kt_father_lastname = kt_father_lastname
         up_catechumene.kt_father_nationality = kt_father_nationality
@@ -488,8 +504,8 @@ def updateCatechumene():
         up_catechumene.kt_godmother_mobile = kt_godmother_mobile
         up_catechumene.kt_godmother_civil_marriage = kt_godmother_civil_marriage
         up_catechumene.kt_godmother_religious_marriage = kt_godmother_religious_marriage
-        up_catechumene.kt_birth_certificate = kt_birth_certificate
-
+        up_catechumene.kt_birth_certificate = kt_birth_certificate,
+        
 
         try:
             # Committer les changements dans la base de données
@@ -512,28 +528,70 @@ def updateCatechumene():
     return response
 
 
-        
-        
-# Fonction pour supprimer un utilisateur.
+
 def deleteCatechumene():
     response = {}
+    data = request.json
+    print("Request Payload:", data)  # Vérifiez ici si `created_by` est bien présent dans la requête
 
     kt_uid = request.json.get('kt_uid')
     kt_matricule = request.json.get('kt_matricule')
+    created_by = data.get('created_by') 
+    admin_name = data.get('admin_name') 
+    
+    print("Created By:", created_by)
+    print("Admin Name:", admin_name)
 
-    del_catechumene = kt_catechumene.query.filter_by(kt_uid=kt_uid, kt_matricule=kt_matricule).first()
+    # Vérification des champs obligatoires
+    if kt_uid and kt_matricule:
+        # Rechercher le catéchiste à supprimer
+        del_catechumene = kt_catechumene.query.filter_by(kt_uid=kt_uid, kt_matricule=kt_matricule).first()
 
-    if del_catechumene:
-        db.session.delete(del_catechumene)
-        db.session.commit()
+        if del_catechumene:
+            try:
+                # Supprimer le catéchiste
+                del_catechumene.is_deleted = True
+                db.session.delete(del_catechumene)
+                db.session.commit()
 
-        response['status'] = 'success'
-        response['message'] = 'catachumene deleted successfully'
+                # Créer le log de suppression
+                if created_by and admin_name:
+                    create_log(
+                        created_by, 
+                        admin_name,  
+                        "delete", 
+                        "catechumene", 
+                        del_catechumene.c_uid, 
+                        del_catechumene.c_matricule, 
+                        f'{del_catechumene.c_firstname} {del_catechumene.c_lastname}',
+                        "deletion of the catechist "
+                    )
+                    print("Log added successfully")
+                else:
+                    print("Admin user or created_by not found for logging")
+
+                # Réponse de succès
+                response['status'] = 'success'
+                response['message'] = 'catechumene deleted successfully'
+
+            except Exception as e:
+                db.session.rollback()  # Annuler en cas d'erreur
+                print("Error deleting catechumene:", e)
+                response['status'] = 'error'
+                response['message'] = 'Failed to delete catechumene'
+                response['error_description'] = str(e)
+        else:
+            # Catéchiste introuvable
+            response['status'] = 'error'
+            response['message'] = 'catechumene not found'
     else:
+        # Données manquantes
         response['status'] = 'error'
-        response['message'] = 'catachumene not found'
+        response['message'] = 'c_uid and c_matricule are required'
 
-    return response
+    # Retourner la réponse JSON
+    return jsonify(response)
+
 
 def readCatechumeneBySectionAndLevel():
     try:

@@ -9,6 +9,8 @@ import { CatechistInfoComponent } from './catechist-info/catechist-info.componen
 import { CatechumenInfoComponent } from './catechumen-info/catechumen-info.component';
 import { CatechisteReceivedComponent } from './catechiste-received/catechiste-received.component';
 import { CatechumeneReceivedComponent } from './catechumene-received/catechumene-received.component';
+import { EditCatechumeneComponent } from './edit-catechumene/edit-catechumene.component';
+import { EditCatechisteComponent } from './edit-catechiste/edit-catechiste.component';
 
 const routes: Routes = [
   {path:'', component:AdminComponent,
@@ -32,6 +34,8 @@ const routes: Routes = [
     {path: 'animateurs', component:AnimateursComponent},
     {path: 'catechiste-received/:c_uid', component:CatechisteReceivedComponent},
     {path: 'catechumene-received/:kt_uid', component:CatechumeneReceivedComponent},
+    {path: 'edit-catechumene/:kt_uid', component:EditCatechumeneComponent},
+    {path: 'edit-catechiste/:c_uid', component:EditCatechisteComponent},
   ]
 }
 
